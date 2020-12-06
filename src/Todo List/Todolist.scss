@@ -1,0 +1,61 @@
+$red: #DE4C4A;
+
+*{
+ margin: 0px;
+ padding: 0px;
+}
+
+.todolist_panel{
+    background-color: #1F1F1F;
+    color: #E5E5E5;
+    width: 100vw;
+    height: 100vh;
+
+    .todolist-container{
+        width: 50%;
+        margin: auto;
+        border: 1px solid $red;
+
+        .project-name{
+            padding: 5px 10px;
+            margin-top: 50px;
+        }
+    
+        .add-task-label{
+            padding: 8px 0px;
+            transition: 0.3s;
+            cursor: pointer;
+        
+            &:hover{
+                color: $red;
+            }
+        
+            span{
+                display: inline-block;
+                padding: 2px;
+                margin-left: 5px;
+            }
+        
+            div {
+                display: inline-block;
+                padding: 2px;
+                margin-left: 4px;
+            }
+        }
+    
+        .add-task-panel{
+            display: none;
+        }
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
