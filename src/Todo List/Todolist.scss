@@ -14,11 +14,11 @@ $red: #DE4C4A;
     .todolist-container{
         width: 50%;
         margin: auto;
-        border: 1px solid $red;
+        padding-top: 50px;
+        border: 1px solid red;
 
         .project-name{
             padding: 5px 10px;
-            margin-top: 50px;
         }
     
         .add-task-label{

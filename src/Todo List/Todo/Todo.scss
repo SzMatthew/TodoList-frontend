@@ -1,4 +1,7 @@
-$red: #DE4C4A;
+$red   : #DE4C4A;
+$yellow: #FB9814;
+$blue  : #4271B8;
+$grey  : #7F7F7F;
 
 .todo{
     padding: 9px 0px;
@@ -10,15 +13,19 @@ $red: #DE4C4A;
         height: 22px;
         width: 22px;
         border-radius: 50%;
-        border:2px solid $red;
-        transition: 0.3s;
         margin: 0px 10px;
-
-        
 
         .checked-icon{
             display: flex;
+            opacity: 0;
             margin: 1px 0px 0px 1px;
+            transition: opacity 0.2s ease-in-out;
+        }
+
+        &:hover{
+            .checked-icon{
+                opacity: 1;
+            }
         }
     }
 
@@ -26,9 +33,23 @@ $red: #DE4C4A;
         margin: 0px;
         padding: 0px;
     }
+
+    .red{
+        border: 2px solid $red;
+    }
+
+    .blue{
+        border: 2px solid $blue;
+    }
+
+    .yellow{
+        border: 2px solid $yellow;
+    }
+    
+    .grey{
+        border: 2px solid $grey;
+    }
 }
-
-
 
 
 
