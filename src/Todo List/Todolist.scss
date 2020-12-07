@@ -12,13 +12,14 @@ $red: #DE4C4A;
     height: 100vh;
 
     .todolist-container{
-        width: 50%;
+        width: 700px;
         margin: auto;
         padding-top: 50px;
-        border: 1px solid red;
+        //border: 1px solid red;
 
         .project-name{
-            padding: 5px 10px;
+            padding: 15px 10px;
+            font-size: 22px;
         }
     
         .add-task-label{
@@ -34,17 +35,14 @@ $red: #DE4C4A;
                 display: inline-block;
                 padding: 2px;
                 margin-left: 5px;
+                vertical-align: top;
             }
         
             div {
                 display: inline-block;
-                padding: 2px;
-                margin-left: 4px;
+                padding: 2px 0px;
+                margin-left: 6px;
             }
-        }
-    
-        .add-task-panel{
-            display: none;
         }
     }
 

@@ -49,7 +49,7 @@ class Todo extends Component
         return (
             <div className="todo">
                 <div className={classNames('priority', this.state.prioriy_color)} onClick={this.SetDone}>
-                    <IconContext.Provider value={{size: "15px", color: this.state.prioriy_color_hex ,className: "checked-icon" }}>
+                    <IconContext.Provider value={{size: "16px", color: this.state.prioriy_color_hex ,className: "checked-icon" }}>
                         <div>
                             <BiCheck />
                         </div>
