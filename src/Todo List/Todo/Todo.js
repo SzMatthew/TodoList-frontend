@@ -1,64 +1,47 @@
-import React, {Component} from 'react';
+import React, {useEffect, useState} from 'react';
 import {BiCheck} from "react-icons/bi";
 import {IconContext} from "react-icons";
 import classNames from "classnames";
 import './Todo.scss';
 
-class Todo extends Component
-{
-    constructor ()
-    {
-        super();
-        this.state = { 
-            prioriy_color: null,
-            priority_color_hex: null
-        }
-    }
+const Todo = ({id, text, priority, onDoneClick}) => {
+    const [priorityColor, setPriorityColor] = useState(null);
+    const [priorityColorHex, setPriorityColorHex] = useState(null);
 
-    componentDidMount = () =>
-    {
-        switch (this.props.priority)
+    useEffect(() => {
+        switch (priority)
         {
             case 1:
-                this.setState({prioriy_color: 'red'});
-                this.setState({prioriy_color_hex: '#DE4C4A'});
+                setPriorityColor('red');
+                setPriorityColorHex('#DE4C4A');
                 break;
             case 2:
-                this.setState({prioriy_color: 'yellow'});
-                this.setState({prioriy_color_hex: '#FB9814'});
+                setPriorityColor('yellow');
+                setPriorityColorHex('#FB9814');
                 break;
             case 3:
-                this.setState({prioriy_color: 'blue'});
-                this.setState({prioriy_color_hex: '#4271B8'});
+                setPriorityColor('blue');
+                setPriorityColorHex('#4271B8');
 
                 break;
             default:
-                this.setState({prioriy_color: 'grey'});
-                this.setState({prioriy_color_hex: '#7F7F7F'});
+                setPriorityColor('grey');
+                setPriorityColorHex('#7F7F7F');
         }
-    };
+    }, []);
 
-    SetDone = (evt) =>
-    { 
-        this.props.onDoneClick(this.props.id)
-    };
-
-    render ()
-    {
-
-        return (
-            <div className="todo">
-                <div className={classNames('priority', this.state.prioriy_color)} onClick={this.SetDone}>
-                    <IconContext.Provider value={{size: "16px", color: this.state.prioriy_color_hex ,className: "checked-icon" }}>
-                        <div>
-                            <BiCheck />
-                        </div>
-                    </IconContext.Provider>
-                </div>
-                <span className="todo-text">{this.props.text}</span>
+    return (
+        <div className="todo">
+            <div className={classNames('priority', priorityColor)} onClick={() => onDoneClick(id)}>
+                <IconContext.Provider value={{size: "16px", color: priorityColorHex ,className: "checked-icon" }}>
+                    <div>
+                        <BiCheck />
+                    </div>
+                </IconContext.Provider>
             </div>
+            <span className="todo-text">{text}</span>
+        </div>
     )
-    }
 }
 
 export default Todo;
