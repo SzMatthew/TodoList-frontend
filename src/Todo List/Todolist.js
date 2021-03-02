@@ -1,22 +1,23 @@
 import React, {useState} from 'react';
-import './Todolist.scss';
-import '../Global.scss';
 import Todo from './Todo/Todo';
 import {AiOutlinePlus} from "react-icons/ai";
 import {IconContext} from "react-icons";
-import classNames from "classnames";
+import AddTodoPanel from './AddTodoPanel/AddTodoPanel';
+import './Todolist.scss';
+
 
 const Todolist = () => {
     const [todos, setTodos] = useState([
-        {id: 0, text: "Wash the dishes", priority: 1, done: false},
-        {id: 1, text: "Clean up the house", priority: 2, done: false},
-        {id: 2, text: "Add new Layer", priority: 3, done: false},
-        {id: 3, text: "Correct all Hard Coded link", priority: 0, done: false}
+        {id: 3, priority: 4, done: false, text: "Correct all Hard Coded link"},
+        {id: 0, priority: 1, done: false, text: "Wash the dishes",},
+        {id: 2, priority: 3, done: false, text: "Add new Layer"},
+        {id: 1, priority: 2, done: false, text: "Clean up the house"}
     ]);
     const [addTaskOpen, setAddTaskOpen] = useState(false);
-    const [newTodo, setNewTodo] = useState('');
 
-    const HandleTodoDone = (id) =>
+    const sortedTodos = [...todos].sort((firstTodo, secondTodo) => (firstTodo.priority > secondTodo.priority) ? 1 : -1);    
+
+    const SetTodoDone = (id) =>
     { 
         setTodos(todos.map(todo =>{ 
                 if (todo.id === id)
@@ -26,9 +27,17 @@ const Todolist = () => {
         );
     }; 
 
-    const AddTodo = () => {
-        setTodos([...todos, {id: 10, text: newTodo, priority: 3, done: false}]);
-        setNewTodo('');
+    const AddTodo = (newTodo, priority) => setTodos([...todos, {id: GetNextID(), text: newTodo, priority: priority, done: false}]);
+
+    const GetNextID = () => {
+        let maxId = 0;
+
+        todos.map(todo => {
+            if (todo.id > maxId)
+            maxId = todo.id;
+        });
+
+        return maxId + 1;
     };
 
     return (
@@ -36,25 +45,24 @@ const Todolist = () => {
             <div className="todolist-container">
                 <h3 className="project-name">TODO List</h3>
                 {
-                    todos.filter(todo => todo.done === false).map( todo => (
-                        <Todo key={todo.id} id={todo.id} text={todo.text} priority={todo.priority} onDoneClick={HandleTodoDone}/>
+                    sortedTodos.filter(todo => todo.done === false).map(todo => (
+                        <Todo key={todo.id} id={todo.id} text={todo.text} priority={todo.priority} onDoneClick={SetTodoDone} />
                     ))
                 }
-                <div className={classNames("add-task-label", addTaskOpen ? 'hidden' : 'visible')} onClick={() => setAddTaskOpen(!addTaskOpen)}>
-                    <div>
-                        <IconContext.Provider value={{color: "#DE4C4A", size: "18px"}}>
+                {
+                    addTaskOpen
+                        ? <AddTodoPanel setAddTaskOpen={setAddTaskOpen} addTaskOpen={addTaskOpen} AddTodo={AddTodo}/>
+                        : <div className={"add-task-label"} onClick={() => setAddTaskOpen(!addTaskOpen)}>
                             <div>
-                                <AiOutlinePlus />
+                                <IconContext.Provider value={{color: "#DE4C4A", size: "18px"}}>
+                                    <div>
+                                        <AiOutlinePlus />
+                                    </div>
+                                </IconContext.Provider>
                             </div>
-                        </IconContext.Provider>
-                    </div>
-                    <span>Add task</span> 
-                </div>
-                <div className={addTaskOpen? 'visible' : 'hidden'}>
-                    <input type="text" placeholder="e.g. Learn Portugese every 2 days #Learning" value={newTodo} onChange={(event) => setNewTodo(event.target.value)}/>
-                    <button type="button" className="red" onClick={AddTodo}>Add Task</button>
-                    <button type="button" onClick={() => setAddTaskOpen(!addTaskOpen)}>Cancel</button>
-                </div>
+                            <span>Add task</span> 
+                        </div>
+                }
             </div>
         </div>
     )

@@ -22,7 +22,6 @@ const Todo = ({id, text, priority, onDoneClick}) => {
             case 3:
                 setPriorityColor('blue');
                 setPriorityColorHex('#4271B8');
-
                 break;
             default:
                 setPriorityColor('grey');

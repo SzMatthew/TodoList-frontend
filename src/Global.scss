@@ -1,24 +1,27 @@
 $lightest_gey: rgba(255, 255, 255, 0.205);
 $letter_color: #bebebe;
 $red: #DE4C4A;
+$yellow: #FB9814;
+$blue  : #4271B8;
+$grey  : #7F7F7F;
+$mid_gey: rgb(54, 54, 54);
 
 *{
     font-size: 14px;
+    box-sizing: border-box;
 }
 
 input[type="text"]{
     $padding: 12px;
-    width: calc(100% - #{2* $padding});
     background-color: #171717;
     border: 1px solid $lightest_gey;
     outline: none;
     border-radius: 6px;
-    color: $lightest_gey;
+    color: $letter_color;
     padding: $padding;
     margin: 5px 0px;
 
     &:focus{
-        color: $letter_color;
         border: 1px solid $letter_color;
         outline: none;
     }
@@ -43,12 +46,4 @@ button{
         color: $letter_color;
         font-weight: bold;
     }
-}
-
-.hidden{
-    display: none;
-}
-
-.visible{
-    display: block;
 }

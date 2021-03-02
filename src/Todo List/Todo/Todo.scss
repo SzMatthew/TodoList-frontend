@@ -1,7 +1,4 @@
-$red   : #DE4C4A;
-$yellow: #FB9814;
-$blue  : #4271B8;
-$grey  : #7F7F7F;
+@import '../../Global.scss';
 
 .todo{
     padding: 10px 0px;
@@ -10,14 +7,15 @@ $grey  : #7F7F7F;
     align-items: center;
 
     .priority{
-        height: 20px;
-        width: 20px;
+        height: 22px;
+        width: 22px;
         border-radius: 50%;
         margin: 0px 10px;
+        display: flex;
+        justify-content: center;
 
         .checked-icon{
             opacity: 0;
-            margin: 2px 0px 0px 2px;
             transition: opacity 0.2s ease-in-out;
         }
 
