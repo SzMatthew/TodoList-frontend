@@ -26,4 +26,26 @@ describe('TodoList', () => {
         wrapper.find('button').first().simulate('click');
         expect(wrapper.find(Todo).length).toEqual(5);
     });
+
+    it('Adds a new TODO to ENTER press', () => {
+        const wrapper = mount(<TodoList />);
+        wrapper.find('.add-task-label').simulate('click');
+        wrapper.find('input').simulate('change', {target: {value: 'Test Case'}});
+        wrapper.find('input').simulate('keypress', {charCode: 13});
+        expect(wrapper.find(Todo).length).toEqual(5);
+    });
+
+    it("Don't Adds a new TODO to any other key press", () => {
+        const wrapper = mount(<TodoList />);
+        wrapper.find('.add-task-label').simulate('click');
+        wrapper.find('input').simulate('change', {target: {value: 'Test Case'}});
+        wrapper.find('input').simulate('keypress', {charCode: 10});
+        expect(wrapper.find(Todo).length).toEqual(4);
+    });
+
+    it('Set TODO done', () => {
+        const wrapper = mount(<TodoList />);
+        wrapper.find('.priority').first().simulate('click');
+        expect(wrapper.find('.priority').length).toEqual(3);
+    });
 });

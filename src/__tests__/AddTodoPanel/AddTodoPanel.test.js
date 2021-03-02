@@ -7,13 +7,28 @@ describe('AddTodoPanel', () => {
         expect(wrapper).toMatchSnapshot();
     });
 
-    it('Set priority', () => {
+    it('Set Red priority', () => {
         const wrapper = shallow(<AddTodoPanel />);
         wrapper.find('div.priority').first().simulate('click');
-        setTimeout(() => {
-            expect(wrapper.find('div.priority').first().hasClass('priority-active')).toEqual(true);
-        }, 200);
-        
+        expect(wrapper.find('div.priority').first().hasClass('priorty-active')).toEqual(true);
+    });
+
+    it('Set Orange priority', () => {
+        const wrapper = shallow(<AddTodoPanel />);
+        wrapper.find('div.priority').at(1).simulate('click');
+        expect(wrapper.find('div.priority').at(1).hasClass('priorty-active')).toEqual(true);
+    });
+
+    it('Set Blue priority', () => {
+        const wrapper = shallow(<AddTodoPanel />);
+        wrapper.find('div.priority').at(2).simulate('click');
+        expect(wrapper.find('div.priority').at(2).hasClass('priorty-active')).toEqual(true);
+    });
+
+    it('Set Grey priority', () => {
+        const wrapper = shallow(<AddTodoPanel />);
+        wrapper.find('div.priority').at(3).simulate('click');
+        expect(wrapper.find('div.priority').at(3).hasClass('priorty-active')).toEqual(true);
     });
 
     it('Calls "Add TODO" function', () => {
@@ -21,5 +36,12 @@ describe('AddTodoPanel', () => {
         const wrapper = mount(<AddTodoPanel AddTodo={AddTodo}/>);
         wrapper.find('button').first().simulate('click');
         expect(AddTodo).toBeCalled();
+    });
+
+    it('Close Add Todo panel', () => {
+        const setAddTaskOpen = jest.fn();
+        const wrapper = shallow(<AddTodoPanel setAddTaskOpen={setAddTaskOpen} addTaskOpen={true}/>);
+        wrapper.find('button').at(1).simulate('click');
+        expect(wrapper).toEqual({});
     });
 });
