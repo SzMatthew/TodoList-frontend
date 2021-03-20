@@ -12,8 +12,11 @@ const AddTodoPanel = ({setAddTaskOpen, addTaskOpen, AddTodo}) => {
     useEffect(() => todoRef.current.focus(), []);
 
     const AddNewTodo = () => {
-        AddTodo(newTodo, priority);
-        setNewTodo('');
+        if (newTodo)
+        {
+            AddTodo(newTodo, priority);
+            setNewTodo('');
+        }
     }
 
     return(
@@ -38,13 +41,13 @@ const AddTodoPanel = ({setAddTaskOpen, addTaskOpen, AddTodo}) => {
                     <div className={priority === 3 ? 'priority priorty-active' : 'priority'} onClick={() => setPriorty(3)}>
                         <IconContext.Provider value={{color: "#4271B8", size: "25px"}}><BsFillFlagFill /></IconContext.Provider>
                     </div>
-                    <div className={priority === 0 ? 'priority priorty-active' : 'priority'} onClick={() => setPriorty(0)}>
+                    <div className={priority === 0 ? 'priority priorty-active' : 'priority'} onClick={() => setPriorty(4)}>
                         <IconContext.Provider value={{color: "#7F7F7F", size: "25px"}}> <BsFillFlagFill /></IconContext.Provider>
                     </div>
                 </div>
                 
             </div>
-            <button type="button" className="red" onClick={AddNewTodo}>Add Task</button>
+            <button type="button" disabled={!newTodo} className="red" onClick={AddNewTodo}>Add Task</button>
             <button type="button" onClick={() => setAddTaskOpen(!addTaskOpen)}>Cancel</button>
         </>
     )

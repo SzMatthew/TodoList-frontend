@@ -1,6 +1,7 @@
 $lightest_gey: rgba(255, 255, 255, 0.205);
 $letter_color: #bebebe;
 $red: #DE4C4A;
+$dark-red: #7a2928;
 $yellow: #FB9814;
 $blue  : #4271B8;
 $grey  : #7F7F7F;
@@ -45,5 +46,10 @@ button{
         background-color: $red;
         color: $letter_color;
         font-weight: bold;
+
+        &:disabled{
+            background-color: $dark-red;
+            color: $lightest_gey;
+        }
     }
 }

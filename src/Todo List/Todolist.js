@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Todo from './Todo/Todo';
 import {AiOutlinePlus} from "react-icons/ai";
 import {IconContext} from "react-icons";
@@ -7,38 +7,71 @@ import './Todolist.scss';
 
 
 const Todolist = () => {
-    const [todos, setTodos] = useState([
-        {id: 3, priority: 4, done: false, text: "Correct all Hard Coded link"},
-        {id: 0, priority: 1, done: false, text: "Wash the dishes",},
-        {id: 2, priority: 3, done: false, text: "Add new Layer"},
-        {id: 1, priority: 2, done: false, text: "Clean up the house"}
-    ]);
+    const [todos, setTodos] = useState([]);
     const [addTaskOpen, setAddTaskOpen] = useState(false);
 
-    const sortedTodos = [...todos].sort((firstTodo, secondTodo) => (firstTodo.priority > secondTodo.priority) ? 1 : -1);    
+    const sortedTodos = [...todos].sort((firstTodo, secondTodo) => (firstTodo.priority > secondTodo.priority) ? 1 : -1);
 
-    const SetTodoDone = (id) =>
-    { 
-        setTodos(todos.map(todo =>{ 
-                if (todo.id === id)
-                    todo.done = true;
-                return todo;
+    useEffect(() => {
+        getTodos();
+    }, []);
+
+    const getTodos = () => {
+        fetch('http://localhost:4000/todos')
+            .then(response => response.json())
+            .then(data => {
+                setTodos(data)
+                if (todos.filter(todo => todo.done === false).length === 0) {
+                    setAddTaskOpen(true);
+                }
             })
-        );
-    }; 
+    };
 
-    const AddTodo = (newTodo, priority) => setTodos([...todos, {id: GetNextID(), text: newTodo, priority: priority, done: false}]);
+    const insertTodo = (newTodo, priority) => {
+        let todo = {
+            text: newTodo,
+            priority: priority,
+            done: false
+        };
 
-    const GetNextID = () => {
-        let maxId = 0;
+        console.log('todo', todo);
 
-        todos.map(todo => {
-            if (todo.id > maxId)
-            maxId = todo.id;
+        fetch('http://localhost:4000/todos', {
+            method: 'POST',
+            headers: {'Content-type': 'application/json'},
+            body: JSON.stringify(todo)
+        })
+            .then(res => res.json())
+            .then((data) => {
+                if (data._id) {
+                    getTodos();
+                }
+            })
+            .catch((err) => {console.error(err)})
+    };
+
+    
+    const updateTodoDone = (id) => {
+        let todoToUpdate = null;
+
+        todos.map(todo => { 
+            if (todo._id === id) {
+                todo.done = true;
+                todoToUpdate = todo;
+            } 
         });
 
-        return maxId + 1;
-    };
+        fetch('http://localhost:4000/todos', {
+            method: 'PUT',
+            headers: {'Content-type': 'application/json'},
+            body: JSON.stringify(todoToUpdate)
+        })
+            .then(res => res.json())
+            .then((data) => {
+                getTodos();
+            })
+            .catch((err) => {console.error(err)})
+    }
 
     return (
         <div className="todolist_panel">
@@ -46,12 +79,12 @@ const Todolist = () => {
                 <h3 className="project-name">TODO List</h3>
                 {
                     sortedTodos.filter(todo => todo.done === false).map(todo => (
-                        <Todo key={todo.id} id={todo.id} text={todo.text} priority={todo.priority} onDoneClick={SetTodoDone} />
+                        <Todo key={todo._id} id={todo._id} text={todo.text} priority={todo.priority} onDoneClick={updateTodoDone} />
                     ))
                 }
                 {
                     addTaskOpen
-                        ? <AddTodoPanel setAddTaskOpen={setAddTaskOpen} addTaskOpen={addTaskOpen} AddTodo={AddTodo}/>
+                        ? <AddTodoPanel setAddTaskOpen={setAddTaskOpen} addTaskOpen={addTaskOpen} AddTodo={insertTodo}/>
                         : <div className={"add-task-label"} onClick={() => setAddTaskOpen(!addTaskOpen)}>
                             <div>
                                 <IconContext.Provider value={{color: "#DE4C4A", size: "18px"}}>
