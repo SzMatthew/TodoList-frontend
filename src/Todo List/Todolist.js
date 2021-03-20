@@ -20,10 +20,9 @@ const Todolist = () => {
         fetch('http://localhost:4000/todos')
             .then(response => response.json())
             .then(data => {
-                setTodos(data)
-                if (todos.filter(todo => todo.done === false).length === 0) {
+                setTodos(data);
+                if (data.filter(todo => todo.done === false).length === 0)
                     setAddTaskOpen(true);
-                }
             })
     };
 
