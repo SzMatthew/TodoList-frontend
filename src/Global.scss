@@ -1,11 +1,4 @@
-$lightest_grey: rgba(255, 255, 255, 0.205);
-$letter_color: #bebebe;
-$red: #DE4C4A;
-$dark-red: #7a2928;
-$yellow: #FB9814;
-$blue  : #4271B8;
-$grey  : #7F7F7F;
-$mid_grey: rgb(54, 54, 54);
+@import './Variables.scss';
 
 *{
     font-size: 14px;
