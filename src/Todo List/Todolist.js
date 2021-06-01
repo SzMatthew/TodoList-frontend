@@ -4,6 +4,7 @@ import {AiOutlinePlus} from "react-icons/ai";
 import {BsChevronDown} from 'react-icons/bs';
 import {IconContext} from "react-icons";
 import AddTodoPanel from './AddTodoPanel/AddTodoPanel';
+import NoTodoLabel from './NoTodoLabel/NoTodoLabel';
 import {setConfiguration, Container, Row, Col} from 'react-grid-system';
 import {Collapse} from 'react-collapse';
 import './Todolist.scss';
@@ -99,9 +100,10 @@ const Todolist = () => {
                 <Col xxl={5} xl={6} md={7} sm={10} xs={11} className="todolist-container">
                     <h3 className="project-name">TODO List</h3>
                     {
-                        sortedTodos.filter(todo => todo.done === false).map(todo => (
-                            <Todo key={todo._id} id={todo._id} text={todo.text} priority={todo.priority} onDoneClick={updateTodoDone} onDeleteClick={deleteTodo}/>
-                        ))
+                        sortedTodos.filter(todo => todo.done === false).length
+                            ? sortedTodos.filter(todo => todo.done === false).map(todo => (
+                                <Todo key={todo._id} id={todo._id} text={todo.text} priority={todo.priority} onDoneClick={updateTodoDone} onDeleteClick={deleteTodo}/>))
+                            : <NoTodoLabel text={'Add new TODOs!'}/>
                     }
                     {
                         addTaskOpen
@@ -127,11 +129,13 @@ const Todolist = () => {
 
                         
                     <Collapse isOpened={doneTodosOpen}>
-                        {
+                    {
+                        sortedTodos.filter(todo => todo.done).length ? 
                             sortedTodos.filter(todo => todo.done).map(todo => 
                                 <Todo key={todo._id} id={todo._id} text={todo.text} priority={todo.priority} onDoneClick={updateTodoDone} onDeleteClick={deleteTodo}/>
                             )
-                        }
+                                : <NoTodoLabel text={'There is no TODO to list!'}/>
+                    }
                     </Collapse>
                     
                 </Col>
