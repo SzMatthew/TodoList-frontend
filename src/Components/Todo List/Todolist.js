@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import Todo from './Todo/Todo';
+import Todo from '../Todo/Todo';
 import {AiOutlinePlus} from "react-icons/ai";
 import {BsChevronDown} from 'react-icons/bs';
 import {IconContext} from "react-icons";
-import AddTodoPanel from './AddTodoPanel/AddTodoPanel';
-import NoTodoLabel from './NoTodoLabel/NoTodoLabel';
+import AddTodoPanel from '../AddTodoPanel/AddTodoPanel';
+import NoTodoLabel from '../NoTodoLabel/NoTodoLabel';
 import {setConfiguration, Container, Row, Col} from 'react-grid-system';
 import {Collapse} from 'react-collapse';
 import './Todolist.scss';

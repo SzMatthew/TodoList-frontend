@@ -1,4 +1,4 @@
-import TodoList from './Todo List/Todolist';
+import TodoList from './Components/Todo List/Todolist';
 import './Global.scss';
 
 function App() {
