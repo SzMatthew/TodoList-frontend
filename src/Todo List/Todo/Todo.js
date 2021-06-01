@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {BiCheck} from "react-icons/bi";
+import {RiDeleteBin5Line} from "react-icons/ri";
 import {IconContext} from "react-icons";
 import classNames from "classnames";
 import './Todo.scss';
 
-const Todo = ({id, text, priority, onDoneClick}) => {
+const Todo = ({id, text, priority, onDoneClick, onDeleteClick}) => {
     const [priorityColor, setPriorityColor] = useState(null);
     const [priorityColorHex, setPriorityColorHex] = useState(null);
 
@@ -39,6 +40,10 @@ const Todo = ({id, text, priority, onDoneClick}) => {
                 </IconContext.Provider>
             </div>
             <span className="todo-text">{text}</span>
+
+            <IconContext.Provider value={{size: "18px", className: "delete-icon" }}>
+                <RiDeleteBin5Line onClick={() => onDeleteClick(id)}/>
+            </IconContext.Provider>
         </div>
     )
 }

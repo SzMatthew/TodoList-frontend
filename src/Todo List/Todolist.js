@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import Todo from './Todo/Todo';
 import {AiOutlinePlus} from "react-icons/ai";
+import {BsChevronDown} from 'react-icons/bs';
 import {IconContext} from "react-icons";
 import AddTodoPanel from './AddTodoPanel/AddTodoPanel';
 import {setConfiguration, Container, Row, Col} from 'react-grid-system';
+import {Collapse} from 'react-collapse';
 import './Todolist.scss';
 
 setConfiguration({maxScreenClass: 'xxl'});
@@ -12,6 +14,7 @@ setConfiguration({maxScreenClass: 'xxl'});
 const Todolist = () => {
     const [todos, setTodos] = useState([]);
     const [addTaskOpen, setAddTaskOpen] = useState(false);
+    const [doneTodosOpen, setDoneTodosOpen] = useState(false);
 
     const sortedTodos = [...todos].sort((firstTodo, secondTodo) => (firstTodo.priority > secondTodo.priority) ? 1 : -1);
 
@@ -52,15 +55,30 @@ const Todolist = () => {
             .catch((err) => {console.error(err)})
     };
 
-    
+    const deleteTodo = (id) => {
+        fetch('http://localhost:4000/todos/' + id, {
+            method: 'DELETE',
+            headers: {'Content-type': 'application/json'},
+        })
+        .then(res => res.json())
+            .then((data) => {
+                if (data === true) {
+                    getTodos();
+                } else {
+                    console.error(data);
+                }
+        })
+        .catch((err) => {console.error(err)})
+    };
+
     const updateTodoDone = (id) => {
         let todoToUpdate = null;
 
-        todos.map(todo => { 
+        todos.map(todo => {
             if (todo._id === id) {
                 todo.done = true;
                 todoToUpdate = todo;
-            } 
+            }
         });
 
         fetch('http://localhost:4000/todos', {
@@ -68,12 +86,12 @@ const Todolist = () => {
             headers: {'Content-type': 'application/json'},
             body: JSON.stringify(todoToUpdate)
         })
-            .then(res => res.json())
-            .then((data) => {
-                getTodos();
-            })
-            .catch((err) => {console.error(err)})
-    }
+        .then(res => res.json())
+        .then((data) => {
+            getTodos();
+        })
+        .catch((err) => {console.error(err)})
+    };
 
     return (
         <Container fluid className="todolist_panel">
@@ -82,7 +100,7 @@ const Todolist = () => {
                     <h3 className="project-name">TODO List</h3>
                     {
                         sortedTodos.filter(todo => todo.done === false).map(todo => (
-                            <Todo key={todo._id} id={todo._id} text={todo.text} priority={todo.priority} onDoneClick={updateTodoDone} />
+                            <Todo key={todo._id} id={todo._id} text={todo.text} priority={todo.priority} onDoneClick={updateTodoDone} onDeleteClick={deleteTodo}/>
                         ))
                     }
                     {
@@ -99,6 +117,23 @@ const Todolist = () => {
                                 <span>Add task</span> 
                             </div>
                     }
+                    <div className="done-todos-row" onClick={() => setDoneTodosOpen(!doneTodosOpen)}>
+                        <h4 className="done-todos-label" >Done TODOs</h4>
+                        <IconContext.Provider value={{className: doneTodosOpen ? "done-todos-arrow-icon upside-down" : "done-todos-arrow-icon"}}>
+                            <BsChevronDown />
+                        </IconContext.Provider>
+                    </div>
+                    
+
+                        
+                    <Collapse isOpened={doneTodosOpen}>
+                        {
+                            sortedTodos.filter(todo => todo.done).map(todo => 
+                                <Todo key={todo._id} id={todo._id} text={todo.text} priority={todo.priority} onDoneClick={updateTodoDone} onDeleteClick={deleteTodo}/>
+                            )
+                        }
+                    </Collapse>
+                    
                 </Col>
             </Row>
         </Container>

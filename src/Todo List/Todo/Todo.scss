@@ -5,6 +5,7 @@
     border-bottom: 1px solid hsla(0,0%,100%,.1); 
     display: flex;
     align-items: center;
+    transition: 0.3s;
 
     .priority{
         height: 22px;
@@ -26,9 +27,28 @@
         }
     }
 
+    &:hover{
+        .delete-icon{
+            opacity: 0.7;
+        }
+    }
+
     .todo-text{
         margin: 0px;
         padding: 0px;
+    }
+
+    .delete-icon{
+        color: $grey;
+        transition: 0.2s;
+        margin-left: auto;
+        margin-right: 5px;
+        opacity: 0;
+
+        &:hover{
+            color: $letter_color;
+            cursor: pointer;
+        }
     }
 
     .red{

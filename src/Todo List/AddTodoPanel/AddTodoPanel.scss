@@ -1,6 +1,5 @@
 @import '../../Global.scss';
 
-
 input{
     width: 100%;
 }
@@ -21,11 +20,11 @@ input{
         transition: 0.2s;
 
         &:hover{
-            border: 2px solid $lightest_gey;
+            border: 2px solid $lightest_grey;
         }
     }
 
     .priorty-active{
-        background-color: $mid_gey;
+        background-color: $mid_grey;
     }
 }
