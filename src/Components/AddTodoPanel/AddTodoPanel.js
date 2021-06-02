@@ -54,7 +54,6 @@ const AddTodoPanel = ({setAddTaskOpen, addTaskOpen, AddTodo}) => {
                 <button type="button" disabled={!newTodo} className="red" onClick={AddNewTodo}>Add Task</button>
                 <button type="button" onClick={() => setAddTaskOpen(!addTaskOpen)}>Cancel</button>
             </Col>
-            
         </Row>
     )
 }

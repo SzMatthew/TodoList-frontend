@@ -1,0 +1,31 @@
+@import '../../Variables.scss';
+
+.navbar {
+    position: fixed;
+    margin: 0px;
+    background-color: $mid-light_grey;
+    height: 100%;
+    padding: 7px;
+    left: -300px;
+    z-index: 2;
+    width: 300px;
+    transition: left 350ms ease-in-out;
+
+    .close-icon {
+        float: right;
+        color: $grey;
+        transition: 0.2s;
+
+        &:hover {
+            color: $letter_color;
+        }
+    }
+}
+
+.navbar--after_open {
+    left: 0;
+}
+
+.navbar--before_close {
+    left: -300px;
+}

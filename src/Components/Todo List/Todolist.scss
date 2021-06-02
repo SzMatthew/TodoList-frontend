@@ -5,13 +5,24 @@
  padding: 0px;
 }
 
-.todolist_panel{
+.todolist_panel {
     background-color: #1F1F1F;
     color: #E5E5E5;
     min-height: 100vh;
     overflow-y: hidden;
 
-    .todolist-container{
+    .hamburger-icon {
+        float: left;
+        margin: 20px 0;
+        color: $grey;
+        transition: 0.2s;
+
+        &:hover {
+            color: $letter_color;
+        }
+    }
+
+    .todolist-container {
         padding-top: 50px;
 
         .project-name{
@@ -73,7 +84,7 @@
 
 }
 
-.red-border{
+.red-border {
     border: 1px solid red;
 }
 
