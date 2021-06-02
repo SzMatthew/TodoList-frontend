@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import {useParams} from 'react-router-dom';
 import Todo from '../Todo/Todo';
 import AddTodoPanel from '../AddTodoPanel/AddTodoPanel';
 import NoTodoLabel from '../NoTodoLabel/NoTodoLabel';
@@ -15,6 +16,7 @@ setConfiguration({maxScreenClass: 'xxl'});
 
 
 const Todolist = () => {
+    const {id} = useParams();
     const [todos, setTodos] = useState([]);
     const [addTaskOpen, setAddTaskOpen] = useState(false);
     const [isDoneTodosOpen, setDoneTodosOpen] = useState(false);
@@ -99,10 +101,8 @@ const Todolist = () => {
 
     return (
         <>
-            
-                    <SideNav isOpen={isSideNavOpen} setSideNavOpen={setSideNavOpen}/>
+            <SideNav isOpen={isSideNavOpen} setSideNavOpen={setSideNavOpen}/>
                     
-            
             <Container fluid className="todolist_panel">
                 <IconContext.Provider value={{className: "hamburger-icon", size: "24px"}}>
                     <GoThreeBars onClick={() => setSideNavOpen(!isSideNavOpen)}/>

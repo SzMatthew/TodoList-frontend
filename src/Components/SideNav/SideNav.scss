@@ -10,6 +10,8 @@
     z-index: 2;
     width: 300px;
     transition: left 350ms ease-in-out;
+    border-radius: 0 15px 15px 0;
+    
 
     .close-icon {
         float: right;
@@ -20,10 +22,17 @@
             color: $letter_color;
         }
     }
+
+    h3 {
+        color: $letter_color;
+        font-size: 20px;
+        margin: 10px $navbar-side-padding;
+    }
 }
 
 .navbar--after_open {
     left: 0;
+    box-shadow: 5px 3px 15px rgb(20, 20, 20);
 }
 
 .navbar--before_close {
