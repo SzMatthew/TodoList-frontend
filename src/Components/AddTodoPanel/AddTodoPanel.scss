@@ -4,27 +4,31 @@ input{
     width: 100%;
 }
 
-.priority-wrapper{
-    margin: 5px 0px;
-    display: flex;
-    justify-content: center;
-
-    .priority{
-        width: 30px;
-        margin: 0px 2px;
+.add_todo_panel_wrapper {
+    padding: 5px 0;
+    
+    .priority-wrapper{
+        margin: 5px 0px;
         display: flex;
         justify-content: center;
-        align-items: center;
-        border-radius: 6px;
-        border: 2px solid transparent;
-        transition: 0.2s;
 
-        &:hover{
-            border: 2px solid $lightest_grey;
+        .priority{
+            width: 30px;
+            margin: 0px 2px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 6px;
+            border: 2px solid transparent;
+            transition: 0.2s;
+
+            &:hover{
+                border: 2px solid $lightest_grey;
+            }
         }
-    }
 
-    .priorty-active{
-        background-color: $mid_grey;
+        .priorty-active{
+            background-color: $mid_grey;
+        }
     }
 }

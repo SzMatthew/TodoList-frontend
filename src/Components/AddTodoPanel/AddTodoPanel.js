@@ -21,7 +21,7 @@ const AddTodoPanel = ({setAddTaskOpen, addTaskOpen, AddTodo}) => {
     }
 
     return(
-        <Row>
+        <Row className="add_todo_panel_wrapper">
             <Col xs={12}>
                 <Row>
                     <Col lg={9} md={8} sm={12} xs={12}>

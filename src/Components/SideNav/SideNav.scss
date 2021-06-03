@@ -1,33 +1,57 @@
 @import '../../Variables.scss';
 
 .navbar {
-    position: fixed;
-    margin: 0px;
+    position        : fixed;
+    margin          : 0px;
     background-color: $mid-light_grey;
-    height: 100%;
-    padding: 7px;
-    left: -300px;
-    z-index: 2;
-    width: 300px;
-    transition: left 350ms ease-in-out;
-    border-radius: 0 15px 15px 0;
+    height          : 100%;
+    padding         : 15px;
+    left            : -300px;
+    z-index         : 2;
+    width           : 300px;
+    transition      : left 350ms ease-in-out;
+    border-radius   : 0 15px 15px 0;
     
 
     .close-icon {
-        float: right;
-        color: $grey;
-        transition: 0.2s;
+        float       : right;
+        color       : $grey;
+        transition  : $transition-time;
+        margin-top  : 10px;
+        margin-right: 5px;
+        cursor      : pointer;
 
         &:hover {
-            color: $letter_color;
+            color: $red;
         }
     }
 
-    h3 {
-        color: $letter_color;
-        font-size: 20px;
-        margin: 10px $navbar-side-padding;
+    .project-label {
+        color      : $grey;
+        font-size  : 22px;
+        margin     : 20px $navbar-side-padding 20px $navbar-side-padding;
+        cursor     : default;
+        user-select: none;
     }
+
+    .project_list_item {
+        padding        : 10px $navbar-side-padding 8px 20px;
+        border-bottom  : 1px solid $grey;
+        list-style-type: none;
+
+        a {
+            text-decoration: none;
+            color          : $letter_color;
+            transition     : $transition-time;
+            font-size      : 19px;
+            font-weight    : bold;
+
+            &:hover {
+                color: $red;
+            }
+        }
+    }
+
 }
 
 .navbar--after_open {

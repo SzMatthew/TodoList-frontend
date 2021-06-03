@@ -104,7 +104,7 @@ const Todolist = () => {
             <SideNav isOpen={isSideNavOpen} setSideNavOpen={setSideNavOpen}/>
                     
             <Container fluid className="todolist_panel">
-                <IconContext.Provider value={{className: "hamburger-icon", size: "24px"}}>
+                <IconContext.Provider value={{className: "hamburger-icon", size: "30px"}}>
                     <GoThreeBars onClick={() => setSideNavOpen(!isSideNavOpen)}/>
                 </IconContext.Provider>
 
@@ -121,13 +121,9 @@ const Todolist = () => {
                             addTaskOpen
                                 ? <AddTodoPanel setAddTaskOpen={setAddTaskOpen} addTaskOpen={addTaskOpen} AddTodo={insertTodo}/>
                                 : <div className={"add-task-label"} onClick={() => setAddTaskOpen(!addTaskOpen)}>
-                                    <div>
-                                        <IconContext.Provider value={{color: "#DE4C4A", size: "18px"}}>
-                                            <div>
-                                                <AiOutlinePlus />
-                                            </div>
-                                        </IconContext.Provider>
-                                    </div>
+                                    <IconContext.Provider value={{color: "#DE4C4A", size: "22px"}}>
+                                        <AiOutlinePlus />
+                                    </IconContext.Provider>
                                     <span>Add task</span> 
                                 </div>
                         }
