@@ -26,12 +26,13 @@
     .todolist-container {
         padding-top: 50px;
 
-        .project-name{
-            padding: 15px 10px;
-            font-size: 22px;
+        .project-name {
+            margin: 15px 10px 30px 15px;
+            font-size: 26px;
+            cursor: default;
         }
     
-        .add-task-label{
+        .add-task-label {
             padding: 8px 10px;
             transition: 0.3s;
             cursor: pointer;
@@ -58,7 +59,7 @@
             }
         }
 
-        .done-todos-row{
+        .done-todos-row {
             margin-top: 30px;
             width: 100%;
             display: flex;
@@ -84,6 +85,27 @@
             }
         }
         
+        .done_todos_panel {
+            height: 0;
+            * {
+                display: none;
+            }
+            transition: all 350ms ease-in-out;
+        }
+
+        .done_todos_panel--after-open {
+            height: auto;
+            * {
+                display: flex;
+            }
+        }
+
+        .done_todos_panel--before-close {
+            height: 0;
+            * {
+                display: none;
+            }
+        }
     }
 
 }

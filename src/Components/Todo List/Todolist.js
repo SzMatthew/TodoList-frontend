@@ -9,14 +9,13 @@ import {BsChevronDown} from 'react-icons/bs';
 import {GoThreeBars} from 'react-icons/go';
 import {IconContext} from "react-icons";
 import {setConfiguration, Container, Row, Col} from 'react-grid-system';
-import Collapse from 'react-bootstrap/Collapse';
 import './Todolist.scss';
 
 setConfiguration({maxScreenClass: 'xxl'});
 
 
 const Todolist = () => {
-    const {id} = useParams();
+    const {projectName} = useParams();
     const [todos, setTodos] = useState([]);
     const [addTaskOpen, setAddTaskOpen] = useState(false);
     const [isDoneTodosOpen, setDoneTodosOpen] = useState(false);
@@ -110,7 +109,7 @@ const Todolist = () => {
 
                 <Row justify="center">
                     <Col xxl={5} xl={6} md={7} sm={10} xs={11} className="todolist-container">
-                        <h3 className="project-name">TODO List</h3>
+                        <h3 className="project-name">{projectName}</h3>
                         {
                             sortedTodos.filter(todo => todo.done === false).length
                                 ? sortedTodos.filter(todo => todo.done === false).map(todo => (
@@ -128,23 +127,21 @@ const Todolist = () => {
                                 </div>
                         }
 
-                        <div className="done-todos-row" onClick={() => setDoneTodosOpen(!isDoneTodosOpen)} aria-controls="doneTodosId" aria-expanded={isDoneTodosOpen}>
+                        <div className="done-todos-row" onClick={() => setDoneTodosOpen(!isDoneTodosOpen)}>
                             <h4 className="done-todos-label" >Done TODOs</h4>
                             <IconContext.Provider value={{className: isDoneTodosOpen ? "done-todos-arrow-icon upside-down" : "done-todos-arrow-icon"}}>
                                 <BsChevronDown />
                             </IconContext.Provider>
                         </div>
                             
-                        <Collapse in={isDoneTodosOpen} >
-                            <div id="doneTodosId">
-                            {
-                                sortedTodos.filter(todo => todo.done).length
-                                    ? sortedTodos.filter(todo => todo.done).map(todo => 
-                                        <Todo key={todo._id} id={todo._id} text={todo.text} priority={todo.priority} onDoneClick={updateTodoDone} onDeleteClick={deleteTodo}/>)
-                                    : <NoTodoLabel text={'There is no TODO to list!'}/>
-                            }
-                            </div>
-                        </Collapse>
+                        <div className={ isDoneTodosOpen ? 'done_todos_panel done_todos_panel--after-open' : 'done_todos_panel done_todos_panel--before-close'} id="doneTodosId">
+                        {
+                            sortedTodos.filter(todo => todo.done).length
+                                ? sortedTodos.filter(todo => todo.done).map(todo => 
+                                    <Todo key={todo._id} id={todo._id} text={todo.text} priority={todo.priority} onDoneClick={updateTodoDone} onDeleteClick={deleteTodo}/>)
+                                    : <NoTodoLabel text={'There is no TODO to list!'} />
+                        }
+                        </div>
                     </Col>
                 </Row>
             </Container>

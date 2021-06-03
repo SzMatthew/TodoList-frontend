@@ -6,7 +6,7 @@ import {Row, Col} from 'react-grid-system';
 import './AddTodoPanel.scss';
 
 const AddTodoPanel = ({setAddTaskOpen, addTaskOpen, AddTodo}) => {
-    const [priority, setPriorty] = useState(0);
+    const [priority, setPriorty] = useState(4);
     const [newTodo, setNewTodo] = useState('');
     const todoRef = useRef();
 
@@ -44,7 +44,7 @@ const AddTodoPanel = ({setAddTaskOpen, addTaskOpen, AddTodo}) => {
                         <div className={priority === 3 ? 'priority priorty-active' : 'priority'} onClick={() => setPriorty(3)}>
                             <IconContext.Provider value={{color: "#4271B8", size: "25px"}}><BsFillFlagFill /></IconContext.Provider>
                         </div>
-                        <div className={priority === 0 ? 'priority priorty-active' : 'priority'} onClick={() => setPriorty(4)}>
+                        <div className={priority === 4 ? 'priority priorty-active' : 'priority'} onClick={() => setPriorty(4)}>
                             <IconContext.Provider value={{color: "#7F7F7F", size: "25px"}}> <BsFillFlagFill /></IconContext.Provider>
                         </div>
                     </Col>
