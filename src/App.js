@@ -6,9 +6,9 @@ function App() {
   return (
     <Switch>
       <Route exact path="/">
-        <Redirect to="/projects/:projectName" />
+        <Redirect to="/projects/:projectId" />
       </Route>
-      <Route path="/projects/:projectName">
+      <Route path="/projects/:projectId">
         <TodoList/>
       </Route>
       <Route>

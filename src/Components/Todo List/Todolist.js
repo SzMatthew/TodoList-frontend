@@ -15,7 +15,7 @@ setConfiguration({maxScreenClass: 'xxl'});
 
 
 const Todolist = () => {
-    const {projectName} = useParams();
+    const {projectId} = useParams();
     const [todos, setTodos] = useState([]);
     const [addTaskOpen, setAddTaskOpen] = useState(false);
     const [isDoneTodosOpen, setDoneTodosOpen] = useState(false);
@@ -109,7 +109,7 @@ const Todolist = () => {
 
                 <Row justify="center">
                     <Col xxl={5} xl={6} md={7} sm={10} xs={11} className="todolist-container">
-                        <h3 className="project-name">{projectName}</h3>
+                        <h3 className="project-name">TODO List</h3>
                         {
                             sortedTodos.filter(todo => todo.done === false).length
                                 ? sortedTodos.filter(todo => todo.done === false).map(todo => (
