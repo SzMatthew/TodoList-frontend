@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {IconContext} from "react-icons";
 import {IoClose} from 'react-icons/io5';
-import {Link} from "react-router-dom"
+import {Link, useParams} from "react-router-dom"
 import './SideNav.scss';
 
 const SideNav = ({isOpen, setSideNavOpen}) => {
     const [projects, setProjects] = useState([]);
+    const {projectId} = useParams();
 
     useEffect(() => {
         getProjects();
@@ -27,7 +28,7 @@ const SideNav = ({isOpen, setSideNavOpen}) => {
             <h3 className="project-label">PROJECTS:</h3>
             <ul>
                 {
-                    projects.map(project => <li className="project_list_item" key={project._id}><Link to={`/projects/${project.title}`}>{project.title}</Link></li>)
+                    projects.map(project => <li className="project_list_item" key={project._id}><Link className={project._id === projectId ? 'active' : ''} to={`/projects/${project._id}`}>{project.title}</Link></li>)
                 }
             </ul>
         </nav>

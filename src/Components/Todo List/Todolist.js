@@ -15,36 +15,40 @@ setConfiguration({maxScreenClass: 'xxl'});
 
 
 const Todolist = () => {
-    const {projectId} = useParams();
-    const [todos, setTodos] = useState([]);
-    const [addTaskOpen, setAddTaskOpen] = useState(false);
+    const {projectId}                         = useParams();
+    const [projectTitle, setProjecTitle]      = useState('');
+    const [todos, setTodos]                   = useState([]);
+    const [addTaskOpen, setAddTaskOpen]       = useState(false);
     const [isDoneTodosOpen, setDoneTodosOpen] = useState(false);
-    const [isSideNavOpen, setSideNavOpen] = useState(false);
+    const [isSideNavOpen, setSideNavOpen]     = useState(false);
 
     const sortedTodos = [...todos].sort((firstTodo, secondTodo) => (firstTodo.priority > secondTodo.priority) ? 1 : -1);
 
     useEffect(() => {
         getTodos();
-    }, []);
+    }, [projectId]);
 
     const getTodos = () => {
-        fetch('http://localhost:4000/todos')
+        fetch(`http://localhost:4000/todos/getTodosByProjectId?projectId=${projectId}`)
             .then(response => response.json())
             .then(data => {
-                setTodos(data);
-                if (data.filter(todo => todo.done === false).length === 0)
+                setTodos(data.todos);
+                setProjecTitle(data.projectTitle);
+
+                const notDoneTodosLength = data.todos.filter(todo => todo.done === false).length;
+
+                if (notDoneTodosLength === 0)
                     setAddTaskOpen(true);
             })
     };
 
     const insertTodo = (newTodo, priority) => {
         let todo = {
+            projectId: projectId,
             text: newTodo,
             priority: priority,
             done: false
         };
-
-        console.log('todo', todo);
 
         fetch('http://localhost:4000/todos', {
             method: 'POST',
@@ -98,18 +102,23 @@ const Todolist = () => {
         .catch((err) => {console.error(err)})
     };
 
+    const handleSideNavOutsideClick = () => {
+        if (isSideNavOpen)
+            setSideNavOpen(false);
+    };
+
     return (
         <>
             <SideNav isOpen={isSideNavOpen} setSideNavOpen={setSideNavOpen}/>
                     
-            <Container fluid className="todolist_panel">
+            <Container fluid className="todolist_panel" onClick={handleSideNavOutsideClick}>
                 <IconContext.Provider value={{className: "hamburger-icon", size: "30px"}}>
                     <GoThreeBars onClick={() => setSideNavOpen(!isSideNavOpen)}/>
                 </IconContext.Provider>
 
                 <Row justify="center">
                     <Col xxl={5} xl={6} md={7} sm={10} xs={11} className="todolist-container">
-                        <h3 className="project-name">TODO List</h3>
+                        <h3 className="project-name">{ projectTitle }</h3>
                         {
                             sortedTodos.filter(todo => todo.done === false).length
                                 ? sortedTodos.filter(todo => todo.done === false).map(todo => (
