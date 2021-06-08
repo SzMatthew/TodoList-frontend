@@ -1,14 +1,16 @@
-import React, {useEffect, useState} from 'react';
-import {useParams} from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { setConfiguration, Container, Row, Col } from 'react-grid-system';
+import { useParams } from 'react-router-dom';
+import { AiOutlinePlus} from 'react-icons/ai';
+import {BsChevronDown} from 'react-icons/bs';
+import {GoThreeBars} from 'react-icons/go';
+import {IconContext} from "react-icons";
 import Todo from '../Todo/Todo';
 import AddTodoPanel from '../AddTodoPanel/AddTodoPanel';
 import NoTodoLabel from '../NoTodoLabel/NoTodoLabel';
 import SideNav from '../SideNav/SideNav';
-import {AiOutlinePlus} from "react-icons/ai";
-import {BsChevronDown} from 'react-icons/bs';
-import {GoThreeBars} from 'react-icons/go';
-import {IconContext} from "react-icons";
-import {setConfiguration, Container, Row, Col} from 'react-grid-system';
+
+
 import './Todolist.scss';
 
 setConfiguration({maxScreenClass: 'xxl'});
@@ -38,16 +40,16 @@ const Todolist = () => {
                 const notDoneTodosLength = data.todos.filter(todo => todo.done === false).length;
 
                 if (notDoneTodosLength === 0)
-                    setAddTaskOpen(true);
+                    setAddTaskOpen(true); 
             })
     };
 
     const insertTodo = (newTodo, priority) => {
         let todo = {
-            projectId: projectId,
+            projectId,
             text: newTodo,
-            priority: priority,
-            done: false
+            priority,
+            done: false,
         };
 
         fetch('http://localhost:4000/todos', {
@@ -69,15 +71,15 @@ const Todolist = () => {
             method: 'DELETE',
             headers: {'Content-type': 'application/json'},
         })
-        .then(res => res.json())
+            .then(res => res.json())
             .then((data) => {
                 if (data === true) {
                     getTodos();
                 } else {
                     console.error(data);
                 }
-        })
-        .catch((err) => {console.error(err)})
+            })
+            .catch((err) => {console.error(err)});
     };
 
     const updateTodoDone = (id) => {

@@ -19,7 +19,7 @@ const SideNav = ({isOpen, setSideNavOpen}) => {
                 setProjects(data);
             })
     };
-    
+
     return (
         <nav className={isOpen ? "navbar navbar--after_open" : "navbar navbar--before_close"}>
             <IconContext.Provider value={{className: "close-icon", size: "25px"}}>
