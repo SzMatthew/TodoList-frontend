@@ -1,10 +1,11 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { BsFillFlagFill } from 'react-icons/bs';
-import { IconContext } from 'react-icons';
-import { Row, Col } from 'react-grid-system';
+import React, {useEffect, useState} from 'react';
+import {BsFillFlagFill} from 'react-icons/bs';
+import {IconContext} from "react-icons";
+import {useRef} from 'react';
+import {Row, Col} from 'react-grid-system';
 import './AddTodoPanel.scss';
 
-const AddTodoPanel = ({ setAddTaskOpen, addTaskOpen, AddTodo }) => {
+const AddTodoPanel = ({setAddTaskOpen, addTaskOpen, AddTodo}) => {
     const [priority, setPriorty] = useState(4);
     const [newTodo, setNewTodo] = useState('');
     const todoRef = useRef();
