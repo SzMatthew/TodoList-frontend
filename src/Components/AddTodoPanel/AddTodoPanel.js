@@ -17,6 +17,7 @@ const AddTodoPanel = ({setAddTaskOpen, addTaskOpen, AddTodo}) => {
         {
             AddTodo(newTodo, priority);
             setNewTodo('');
+            todoRef.current.focus();
         }
     }
 

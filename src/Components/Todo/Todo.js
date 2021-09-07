@@ -33,7 +33,7 @@ const Todo = ({id, text, priority, onDoneClick, onDeleteClick}) => {
     return (
         <div className="todo">
             <div className={classNames('priority', priorityColor)} onClick={() => onDoneClick(id)}>
-                <IconContext.Provider value={{size: "16px", color: priorityColorHex ,className: "checked-icon" }}>
+                <IconContext.Provider value={{size: "16px", color: priorityColorHex, className: "checked-icon" }}>
                     <div>
                         <BiCheck />
                     </div>

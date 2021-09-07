@@ -4,7 +4,7 @@ import Todo from '../Todo/Todo';
 import AddTodoPanel from '../AddTodoPanel/AddTodoPanel';
 import NoTodoLabel from '../NoTodoLabel/NoTodoLabel';
 import SideNav from '../SideNav/SideNav';
-import {AiOutlinePlus} from "react-icons/ai";
+import {AiOutlinePlus, AiOutlineEdit} from "react-icons/ai";
 import {BsChevronDown} from 'react-icons/bs';
 import {GoThreeBars} from 'react-icons/go';
 import {IconContext} from "react-icons";
@@ -15,12 +15,13 @@ setConfiguration({maxScreenClass: 'xxl'});
 
 
 const Todolist = () => {
-    const {projectId}                         = useParams();
-    const [projectTitle, setProjecTitle]      = useState('');
-    const [todos, setTodos]                   = useState([]);
-    const [addTaskOpen, setAddTaskOpen]       = useState(false);
-    const [isDoneTodosOpen, setDoneTodosOpen] = useState(false);
-    const [isSideNavOpen, setSideNavOpen]     = useState(false);
+    const {projectId}                                     = useParams();
+    const [projectTitle, setProjecTitle]                  = useState('');
+    const [todos, setTodos]                               = useState([]);
+    const [addTaskOpen, setAddTaskOpen]                   = useState(false);
+    const [isDoneTodosOpen, setDoneTodosOpen]             = useState(false);
+    const [isSideNavOpen, setSideNavOpen]                 = useState(false);
+    const [isProjectNameEditable, setProjectNameEditable] = useState(false);
 
     const sortedTodos = [...todos].sort((firstTodo, secondTodo) => (firstTodo.priority > secondTodo.priority) ? 1 : -1);
 
@@ -102,9 +103,34 @@ const Todolist = () => {
         .catch((err) => {console.error(err)})
     };
 
+    const updateProjectTitle = (projectTitle) => {
+        fetch('http://localhost:4000/projects/updateProjectTitle', {
+            method: 'PUT',
+            headers: {'Content-type': 'application/json'},
+            body: JSON.stringify({
+                projectId: projectId,
+                projectTitle: projectTitle
+            })
+        })
+        .then(res => res.json())
+        .then((data) => {
+            setProjecTitle(data.title);
+            setProjectNameEditable(false);
+        })
+        .catch((err) => {console.error(err)})
+    };
+
     const handleSideNavOutsideClick = () => {
         if (isSideNavOpen)
             setSideNavOpen(false);
+    };
+
+    const applyProjectNameEditing = (event) => {
+        if (event.key === 'Enter') {
+            if (projectTitle !== event.target.value) {
+                updateProjectTitle(event.target.value);
+            }
+        }
     };
 
     return (
@@ -118,7 +144,18 @@ const Todolist = () => {
 
                 <Row justify="center">
                     <Col xxl={5} xl={6} md={7} sm={10} xs={11} className="todolist-container">
-                        <h3 className="project-name">{ projectTitle }</h3>
+                        {
+                            isProjectNameEditable
+                                ? <header className="header">
+                                    <input type='text' defaultValue={projectTitle} onKeyDown={applyProjectNameEditing} autoFocus/>
+                                </header>
+                                : <header className="header">
+                                    <h3 className="project-name">{ projectTitle }</h3>
+                                    <IconContext.Provider value={{size: "24px", className: "project-name-edit-icon"}}>
+                                        <AiOutlineEdit onClick={() => setProjectNameEditable(true)}/>
+                                    </IconContext.Provider>
+                                </header>
+                        }
                         {
                             sortedTodos.filter(todo => todo.done === false).length
                                 ? sortedTodos.filter(todo => todo.done === false).map(todo => (
