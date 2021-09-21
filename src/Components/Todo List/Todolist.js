@@ -184,7 +184,7 @@ const Todolist = () => {
                         {
                             sortedTodos.filter(todo => todo.done).length
                                 ? sortedTodos.filter(todo => todo.done).map(todo => 
-                                    <Todo key={todo._id} id={todo._id} text={todo.text} priority={todo.priority} onDoneClick={updateTodoDone} onDeleteClick={deleteTodo}/>)
+                                    <Todo key={todo._id} id={todo._id} text={todo.text} priority={todo.priority} done={todo.done} onDoneClick={updateTodoDone} onDeleteClick={deleteTodo}/>)
                                     : <NoTodoLabel text={'There is no TODO to list!'} />
                         }
                         </div>

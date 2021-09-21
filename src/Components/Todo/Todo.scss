@@ -1,13 +1,13 @@
 @import '../../Variables.scss';
 
-.todo{
+.todo {
     padding: 10px 0px;
     border-bottom: 1px solid hsla(0,0%,100%,.1); 
     display: flex;
     align-items: center;
     transition: $transition-time;
 
-    .priority{
+    .priority {
         height: 22px;
         width: 22px;
         border-radius: 50%;
@@ -27,20 +27,27 @@
         }
     }
 
-    &:hover{
+    .done-todo {
+        height: 22px;
+        width: 22px;
+        margin: 0px 7px;
+        color: $lightest_grey;
+    }
+
+    &:hover {
         .delete-icon{
             opacity: 0.7;
         }
     }
 
-    .todo-text{
+    .todo-text {
         margin: 0px;
         padding: 0px;
         opacity: 0.8;
         font-size: 19px;
     }
 
-    .delete-icon{
+    .delete-icon {
         color: $grey;
         transition: 0.2s;
         margin-left: auto;
@@ -53,19 +60,19 @@
         }
     }
 
-    .red{
+    .red {
         border: 2px solid $red;
     }
 
-    .blue{
+    .blue {
         border: 2px solid $blue;
     }
 
-    .yellow{
+    .yellow {
         border: 2px solid $yellow;
     }
     
-    .grey{
+    .grey {
         border: 2px solid $grey;
     }
 }

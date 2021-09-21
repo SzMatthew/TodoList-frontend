@@ -5,7 +5,7 @@ import {IconContext} from "react-icons";
 import classNames from "classnames";
 import './Todo.scss';
 
-const Todo = ({id, text, priority, onDoneClick, onDeleteClick}) => {
+const Todo = ({id, text, priority, done, onDoneClick, onDeleteClick}) => {
     const [priorityColor, setPriorityColor] = useState(null);
     const [priorityColorHex, setPriorityColorHex] = useState(null);
 
@@ -32,13 +32,21 @@ const Todo = ({id, text, priority, onDoneClick, onDeleteClick}) => {
 
     return (
         <div className="todo">
-            <div className={classNames('priority', priorityColor)} onClick={() => onDoneClick(id)}>
-                <IconContext.Provider value={{size: "16px", color: priorityColorHex, className: "checked-icon" }}>
-                    <div>
-                        <BiCheck />
+            {
+                done
+                    ? <div className="done-todo">
+                        <IconContext.Provider value={{size: "22px", className: "checked-icon" }}>
+                            <BiCheck />
+                        </IconContext.Provider>
                     </div>
-                </IconContext.Provider>
-            </div>
+                    : <div className={classNames('priority', priorityColor)} onClick={() => onDoneClick(id)}>
+                        <IconContext.Provider value={{size: "16px", color: priorityColorHex, className: "checked-icon" }}>
+                            <div>
+                                <BiCheck />
+                            </div>
+                        </IconContext.Provider>
+                    </div>
+            }
             <span className="todo-text">{text}</span>
 
             <IconContext.Provider value={{size: "18px", className: "delete-icon" }}>
