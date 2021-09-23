@@ -29,7 +29,7 @@ const useTodoList = () => {
 
     const setTodoList = todoList => {
         if (state.todoList !== todoList) {
-            dispatch({type: 'SET_CURRENT_TODOLIST', payload: todoList});
+            dispatch({type: 'SET_TODOLIST', payload: todoList});
         } 
     }
 

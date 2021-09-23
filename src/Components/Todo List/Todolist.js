@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import {useTodoList} from '../../Contexts/todolist-context';
 import {useParams} from 'react-router-dom';
 import Todo from '../Todo/Todo';
 import AddTodoPanel from '../AddTodoPanel/AddTodoPanel';
@@ -15,15 +16,15 @@ setConfiguration({maxScreenClass: 'xxl'});
 
 
 const Todolist = () => {
+    const {state: {todoList}, setTodoList}                = useTodoList();
     const {projectId}                                     = useParams();
     const [projectTitle, setProjecTitle]                  = useState('');
-    const [todos, setTodos]                               = useState([]);
     const [addTaskOpen, setAddTaskOpen]                   = useState(false);
     const [isDoneTodosOpen, setDoneTodosOpen]             = useState(false);
     const [isSideNavOpen, setSideNavOpen]                 = useState(false);
     const [isProjectNameEditable, setProjectNameEditable] = useState(false);
 
-    const sortedTodos = [...todos].sort((firstTodo, secondTodo) => (firstTodo.priority > secondTodo.priority) ? 1 : -1);
+    const sortedTodos = [...todoList].sort((firstTodo, secondTodo) => (firstTodo.priority > secondTodo.priority) ? 1 : -1);
 
     useEffect(() => {
         getTodos();
@@ -33,7 +34,7 @@ const Todolist = () => {
         fetch(`http://localhost:4000/todos/getTodosByProjectId?projectId=${projectId}`)
             .then(response => response.json())
             .then(data => {
-                setTodos(data.todos);
+                setTodoList(data.todos);
                 setProjecTitle(data.projectTitle);
 
                 const notDoneTodosLength = data.todos.filter(todo => todo.done === false).length;
@@ -84,7 +85,7 @@ const Todolist = () => {
     const updateTodoDone = (id) => {
         let todoToUpdate = null;
 
-        todos.map(todo => {
+        todoList.map(todo => {
             if (todo._id === id) {
                 todo.done = true;
                 todoToUpdate = todo;
