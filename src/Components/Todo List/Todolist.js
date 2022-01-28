@@ -32,7 +32,12 @@ const Todolist = () => {
 
     const getTodos = () => {
         fetch(`http://localhost:4000/todos/getTodosByProjectId?projectId=${projectId}`)
-            .then(response => response.json())
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Something went wrong!');
+                }})
             .then(data => {
                 setTodoList(data.todos);
                 setProjecTitle(data.projectTitle);
@@ -41,6 +46,8 @@ const Todolist = () => {
 
                 if (notDoneTodosLength === 0)
                     setAddTaskOpen(true);
+            }).catch(error => {
+                console.error(`There is no available database: ${error}`);
             })
     };
 

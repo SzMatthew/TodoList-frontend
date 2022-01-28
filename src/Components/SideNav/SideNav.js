@@ -14,9 +14,18 @@ const SideNav = ({isOpen, setSideNavOpen}) => {
 
     const getProjects = () => {
         fetch('http://localhost:4000/projects')
-            .then(response => response.json())
+            .then(response => {
+                if(response.ok){
+                    return response.json();
+                } else {
+                    throw new Error('Something went wrong!');
+                }
+            })
             .then(data => {
                 setProjects(data);
+            })
+            .catch((error) => {
+                console.error(`There is no available database: ${error}`);
             })
     };
     
