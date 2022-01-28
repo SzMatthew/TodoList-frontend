@@ -1,7 +1,7 @@
 import React from 'react';
 import {shallow, mount} from 'enzyme';
-import TodoList from '../../Todo List/Todolist';
-import Todo from '../../Todo List/Todo/Todo';
+import TodoList from '../../Components/Todo List/Todolist';
+import Todo from '../../Components/Todo/Todo';
 
 describe('TodoList', () => {
     it('Renders 4 TODOs', () => {
