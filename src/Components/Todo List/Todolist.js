@@ -10,6 +10,7 @@ import {BsChevronDown} from 'react-icons/bs';
 import {GoThreeBars} from 'react-icons/go';
 import {IconContext} from "react-icons";
 import {setConfiguration, Container, Row, Col} from 'react-grid-system';
+import {toast} from 'react-toastify';
 import './Todolist.scss';
 
 setConfiguration({maxScreenClass: 'xxl'});
@@ -24,6 +25,7 @@ const Todolist = () => {
     const [isSideNavOpen, setSideNavOpen]                 = useState(false);
     const [isProjectNameEditable, setProjectNameEditable] = useState(false);
     const [isProjectNameValid, setIsProjectNameValid]     = useState(true);
+    const projectNameErrorToastId                         = React.useRef(null);
 
     const sortedTodos = [...todoList].sort((firstTodo, secondTodo) => (firstTodo.priority > secondTodo.priority) ? 1 : -1);
 
@@ -126,8 +128,12 @@ const Todolist = () => {
         .then(res => res.json())
         .then((data) => {
             setProjecTitle(data.title);
+            toast.success('Project name updated successfully!');
         })
-        .catch((err) => {console.error(err)})
+        .catch((err) => {
+            console.error(err);
+            toast.error('Something went wrong!');
+        })
     };
 
     const handleSideNavOutsideClick = () => {
@@ -144,6 +150,9 @@ const Todolist = () => {
                 setIsProjectNameValid(true);
 
             } else if (!event.target.value) {
+                if (!toast.isActive(projectNameErrorToastId.current)) {
+                    projectNameErrorToastId.current = toast.error('Todolist name shouldn\'t be empty');
+                }
                 event.target.focus();
                 setIsProjectNameValid(false);
             }
