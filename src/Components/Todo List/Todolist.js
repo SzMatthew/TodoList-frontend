@@ -23,6 +23,7 @@ const Todolist = () => {
     const [isDoneTodosOpen, setDoneTodosOpen]             = useState(false);
     const [isSideNavOpen, setSideNavOpen]                 = useState(false);
     const [isProjectNameEditable, setProjectNameEditable] = useState(false);
+    const [isProjectNameValid, setIsProjectNameValid]     = useState(true);
 
     const sortedTodos = [...todoList].sort((firstTodo, secondTodo) => (firstTodo.priority > secondTodo.priority) ? 1 : -1);
 
@@ -112,6 +113,8 @@ const Todolist = () => {
     };
 
     const updateProjectTitle = (projectTitle) => {
+        if (!projectTitle) return;
+
         fetch('http://localhost:4000/projects/updateProjectTitle', {
             method: 'PUT',
             headers: {'Content-type': 'application/json'},
@@ -123,7 +126,6 @@ const Todolist = () => {
         .then(res => res.json())
         .then((data) => {
             setProjecTitle(data.title);
-            setProjectNameEditable(false);
         })
         .catch((err) => {console.error(err)})
     };
@@ -133,10 +135,17 @@ const Todolist = () => {
             setSideNavOpen(false);
     };
 
-    const applyProjectNameEditing = (event) => {
-        if (event.key === 'Enter') {
-            if (projectTitle !== event.target.value) {
-                updateProjectTitle(event.target.value);
+    const applyProjectNameEditing = (event, onBlur) => {
+        if (onBlur || event.key === 'Enter') {
+            if (event.target.value) {
+                if (event.target.value !== projectTitle) updateProjectTitle(event.target.value);
+                setProjecTitle(event.target.value);
+                setProjectNameEditable(!isProjectNameEditable);
+                setIsProjectNameValid(true);
+
+            } else if (!event.target.value) {
+                event.target.focus();
+                setIsProjectNameValid(false);
             }
         }
     };
@@ -155,7 +164,7 @@ const Todolist = () => {
                         {
                             isProjectNameEditable
                                 ? <header className="header">
-                                    <input type='text' defaultValue={projectTitle} onKeyDown={applyProjectNameEditing} autoFocus/>
+                                    <input type='text' className={isProjectNameValid ? '' : 'red-border'} defaultValue={projectTitle} onKeyDown={applyProjectNameEditing} onFocus={(event) => event.target.select()} onBlur={(event) => applyProjectNameEditing(event, true)} autoFocus/>
                                 </header>
                                 : <header className="header">
                                     <h3 className="project-name">{ projectTitle }</h3>
