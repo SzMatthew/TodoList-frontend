@@ -1,3 +1,4 @@
+import React from 'react';
 import TodoList from './Components/Todo List/Todolist';
 import { TodoListProvider } from './Contexts/todolist-context';
 import { Switch, Route, Redirect } from 'react-router-dom';
@@ -16,10 +17,10 @@ function App() {
           <TodoList/>
         </Route>
         <Route>
-            
+
         </Route>
       </Switch>
-      
+
       <ToastContainer autoClose={3000} newestOnTop theme="colored"/>
     </TodoListProvider>
   );

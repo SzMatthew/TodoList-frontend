@@ -1,3 +1,4 @@
+import React from 'react';
 import {shallow, mount} from 'enzyme';
 import TodoList from '../../Todo List/Todolist';
 import Todo from '../../Todo List/Todo/Todo';
@@ -35,7 +36,7 @@ describe('TodoList', () => {
         expect(wrapper.find(Todo).length).toEqual(5);
     });
 
-    it("Don't Adds a new TODO to any other key press", () => {
+    it('Don\'t Adds a new TODO to any other key press', () => {
         const wrapper = mount(<TodoList />);
         wrapper.find('.add-task-label').simulate('click');
         wrapper.find('input').simulate('change', {target: {value: 'Test Case'}});

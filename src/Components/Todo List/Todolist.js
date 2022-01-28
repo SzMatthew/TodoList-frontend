@@ -5,10 +5,10 @@ import Todo from '../Todo/Todo';
 import AddTodoPanel from '../AddTodoPanel/AddTodoPanel';
 import NoTodoLabel from '../NoTodoLabel/NoTodoLabel';
 import SideNav from '../SideNav/SideNav';
-import {AiOutlinePlus, AiOutlineEdit} from "react-icons/ai";
+import {AiOutlinePlus, AiOutlineEdit} from 'react-icons/ai';
 import {BsChevronDown} from 'react-icons/bs';
 import {GoThreeBars} from 'react-icons/go';
-import {IconContext} from "react-icons";
+import {IconContext} from 'react-icons';
 import {setConfiguration, Container, Row, Col} from 'react-grid-system';
 import {toast} from 'react-toastify';
 import './Todolist.scss';
@@ -162,22 +162,22 @@ const Todolist = () => {
     return (
         <>
             <SideNav isOpen={isSideNavOpen} setSideNavOpen={setSideNavOpen}/>
-                    
-            <Container fluid className="todolist_panel" onClick={handleSideNavOutsideClick}>
-                <IconContext.Provider value={{className: "hamburger-icon", size: "30px"}}>
+
+            <Container fluid className='todolist_panel' onClick={handleSideNavOutsideClick}>
+                <IconContext.Provider value={{className: 'hamburger-icon', size: '30px'}}>
                     <GoThreeBars onClick={() => setSideNavOpen(!isSideNavOpen)}/>
                 </IconContext.Provider>
 
-                <Row justify="center">
-                    <Col xxl={5} xl={6} md={7} sm={10} xs={11} className="todolist-container">
+                <Row justify='center'>
+                    <Col xxl={5} xl={6} md={7} sm={10} xs={11} className='todolist-container'>
                         {
                             isProjectNameEditable
-                                ? <header className="header">
+                                ? <header className='header'>
                                     <input type='text' className={isProjectNameValid ? '' : 'red-border'} defaultValue={projectTitle} onKeyDown={applyProjectNameEditing} onFocus={(event) => event.target.select()} onBlur={(event) => applyProjectNameEditing(event, true)} autoFocus/>
                                 </header>
-                                : <header className="header">
-                                    <h3 className="project-name">{ projectTitle }</h3>
-                                    <IconContext.Provider value={{size: "24px", className: "project-name-edit-icon"}}>
+                                : <header className='header'>
+                                    <h3 className='project-name'>{ projectTitle }</h3>
+                                    <IconContext.Provider value={{size: '24px', className: 'project-name-edit-icon'}}>
                                         <AiOutlineEdit onClick={() => setProjectNameEditable(true)}/>
                                     </IconContext.Provider>
                                 </header>
@@ -191,25 +191,25 @@ const Todolist = () => {
                         {
                             addTaskOpen
                                 ? <AddTodoPanel setAddTaskOpen={setAddTaskOpen} addTaskOpen={addTaskOpen} AddTodo={insertTodo}/>
-                                : <div className={"add-task-label"} onClick={() => setAddTaskOpen(!addTaskOpen)}>
-                                    <IconContext.Provider value={{color: "#DE4C4A", size: "22px"}}>
+                                : <div className={'add-task-label'} onClick={() => setAddTaskOpen(!addTaskOpen)}>
+                                    <IconContext.Provider value={{color: '#DE4C4A', size: '22px'}}>
                                         <AiOutlinePlus />
                                     </IconContext.Provider>
-                                    <span>Add task</span> 
+                                    <span>Add task</span>
                                 </div>
                         }
 
-                        <div className="done-todos-row" onClick={() => setDoneTodosOpen(!isDoneTodosOpen)}>
-                            <h4 className="done-todos-label" >Done TODOs</h4>
-                            <IconContext.Provider value={{className: isDoneTodosOpen ? "done-todos-arrow-icon upside-down" : "done-todos-arrow-icon"}}>
+                        <div className='done-todos-row' onClick={() => setDoneTodosOpen(!isDoneTodosOpen)}>
+                            <h4 className='done-todos-label' >Done TODOs</h4>
+                            <IconContext.Provider value={{className: isDoneTodosOpen ? 'done-todos-arrow-icon upside-down' : 'done-todos-arrow-icon'}}>
                                 <BsChevronDown />
                             </IconContext.Provider>
                         </div>
-                            
-                        <div className={ isDoneTodosOpen ? 'done_todos_panel done_todos_panel--after-open' : 'done_todos_panel done_todos_panel--before-close'} id="doneTodosId">
+
+                        <div className={ isDoneTodosOpen ? 'done_todos_panel done_todos_panel--after-open' : 'done_todos_panel done_todos_panel--before-close'} id='doneTodosId'>
                         {
                             sortedTodos.filter(todo => todo.done).length
-                                ? sortedTodos.filter(todo => todo.done).map(todo => 
+                                ? sortedTodos.filter(todo => todo.done).map(todo =>
                                     <Todo key={todo._id} id={todo._id} text={todo.text} priority={todo.priority} done={todo.done} onDoneClick={updateTodoDone} onDeleteClick={deleteTodo}/>)
                                     : <NoTodoLabel text={'There is no TODO to list!'} />
                         }

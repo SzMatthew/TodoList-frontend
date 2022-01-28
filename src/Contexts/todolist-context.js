@@ -7,7 +7,7 @@ const todoListReducer = (state, action) => {
         case 'SET_TODOLIST': {
             return {todoList: action.payload}
         }
-        default: { 
+        default: {
             throw new Error(`Unsupported action type: ${action.type}`);
         }
     }
@@ -30,11 +30,11 @@ const useTodoList = () => {
     const setTodoList = todoList => {
         if (state.todoList !== todoList) {
             dispatch({type: 'SET_TODOLIST', payload: todoList});
-        } 
+        }
     }
 
     return {
-        state, 
+        state,
         dispatch,
         setTodoList
     }
