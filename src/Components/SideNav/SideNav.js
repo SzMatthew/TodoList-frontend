@@ -7,7 +7,6 @@ import './SideNav.scss';
 
 const SideNav = ({isOpen, setSideNavOpen}) => {
     const [projects, setProjects] = useState([]);
-    const {projectId} = useParams();
 
     useEffect(() => {
         getProjects();
@@ -38,7 +37,7 @@ const SideNav = ({isOpen, setSideNavOpen}) => {
             <h3 className='project-label'>PROJECTS:</h3>
             <ul>
                 {
-                    projects.map(project => <ProjectName key={project._id} projectId={projectId} project={project}/>)
+                    projects.map(project => <ProjectName key={project._id} project={project}/>)
                 }
             </ul>
         </nav>
