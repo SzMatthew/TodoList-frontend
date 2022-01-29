@@ -6,7 +6,7 @@ const NoTodoLabel = ({text}) => {
         <div className='noTodoWrapper'>
             <span>{text}</span>
         </div>
-    )
-}
+    );
+};
 
 export default NoTodoLabel;

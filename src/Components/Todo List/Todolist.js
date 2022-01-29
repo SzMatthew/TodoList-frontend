@@ -51,7 +51,7 @@ const Todolist = () => {
                     setAddTaskOpen(true);
             }).catch(error => {
                 console.error(`There is no available database: ${error}`);
-            })
+            });
     };
 
     const insertTodo = (newTodo, priority) => {
@@ -73,7 +73,7 @@ const Todolist = () => {
                     getTodos();
                 }
             })
-            .catch((err) => {console.error(err)})
+            .catch((err) => {console.error(err);});
     };
 
     const deleteTodo = (id) => {
@@ -89,7 +89,7 @@ const Todolist = () => {
                     console.error(data);
                 }
         })
-        .catch((err) => {console.error(err)})
+        .catch((err) => {console.error(err);});
     };
 
     const updateTodoDone = (id) => {
@@ -111,7 +111,7 @@ const Todolist = () => {
         .then((data) => {
             getTodos();
         })
-        .catch((err) => {console.error(err)})
+        .catch((err) => {console.error(err);});
     };
 
     const updateProjectTitle = (projectTitle) => {
@@ -133,7 +133,7 @@ const Todolist = () => {
         .catch((err) => {
             console.error(err);
             toast.error('Something went wrong!');
-        })
+        });
     };
 
     const handleSideNavOutsideClick = () => {
@@ -218,7 +218,7 @@ const Todolist = () => {
                 </Row>
             </Container>
         </>
-    )
-}
+    );
+};
 
 export default Todolist;

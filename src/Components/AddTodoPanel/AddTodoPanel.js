@@ -19,7 +19,7 @@ const AddTodoPanel = ({ setAddTaskOpen, addTaskOpen, AddTodo }) => {
             setNewTodo('');
             todoRef.current.focus();
         }
-    }
+    };
 
     return (
         <Row className='add_todo_panel_wrapper'>
@@ -31,7 +31,7 @@ const AddTodoPanel = ({ setAddTaskOpen, addTaskOpen, AddTodo }) => {
                             ref         = {todoRef}
                             placeholder = 'e.g. Learn Portugese every 2 days'
                             value       = {newTodo}
-                            onKeyPress  = {(event) => {if (event.charCode === 13 && newTodo) { AddNewTodo()}}}
+                            onKeyPress  = {(event) => {if (event.charCode === 13 && newTodo) { AddNewTodo(); }}}
                             onChange    = {(event) => setNewTodo(event.target.value)}
                         />
                     </Col>
@@ -56,7 +56,7 @@ const AddTodoPanel = ({ setAddTaskOpen, addTaskOpen, AddTodo }) => {
                 <button type='button' onClick={() => setAddTaskOpen(!addTaskOpen)}>Cancel</button>
             </Col>
         </Row>
-    )
-}
+    );
+};
 
 export default AddTodoPanel;

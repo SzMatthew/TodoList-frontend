@@ -53,7 +53,7 @@ const Todo = ({id, text, priority, done, onDoneClick, onDeleteClick}) => {
                 <RiDeleteBin5Line onClick={() => onDeleteClick(id)}/>
             </IconContext.Provider>
         </div>
-    )
-}
+    );
+};
 
 export default Todo;

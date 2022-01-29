@@ -33,36 +33,6 @@
         cursor     : default;
         user-select: none;
     }
-
-    .project_list_item {
-        padding        : 10px $navbar-side-padding 8px 20px;
-        margin-bottom  : 10px;
-        transition     : $transition-time;
-        border-radius  : 10px;
-        list-style-type: none;
-
-        a {
-            text-decoration: none;
-            color          : $letter_color;
-            transition     : $transition-time;
-            font-size      : 19px;
-            font-weight    : bold;
-
-            &.active {
-                color: $red;
-            }
-        }
-
-        &:hover {
-            background-color: $grey;
-            transform       : scale(1.05);
-
-            a:not(.active) {
-                color: black;
-            }
-        }
-    }
-
 }
 
 .navbar--after_open {

@@ -5,19 +5,19 @@ const TodoListContext = createContext();
 const todoListReducer = (state, action) => {
     switch (action.type) {
         case 'SET_TODOLIST': {
-            return {todoList: action.payload}
+            return { todoList: action.payload };
         }
         default: {
             throw new Error(`Unsupported action type: ${action.type}`);
         }
     }
-}
+};
 
 const TodoListProvider = props => {
     const [state, dispatch] = useReducer(todoListReducer, {todoList: []});
     const value = useMemo(() => [state, dispatch], [state]);
-    return <TodoListContext.Provider value={value} {...props}/>
-}
+    return <TodoListContext.Provider value={value} {...props} />;
+};
 
 const useTodoList = () => {
     const context = useContext(TodoListContext);
@@ -31,13 +31,13 @@ const useTodoList = () => {
         if (state.todoList !== todoList) {
             dispatch({type: 'SET_TODOLIST', payload: todoList});
         }
-    }
+    };
 
     return {
         state,
         dispatch,
         setTodoList
-    }
-}
+    };
+};
 
-export {useTodoList, TodoListProvider}
+export { useTodoList, TodoListProvider };

@@ -20,6 +20,7 @@ module.exports = {
         'no-trailing-spaces': 'error',
         'no-multiple-empty-lines': 'error',
         'react/prop-types': 0,
-        'quotes': ['error', 'single']
+        'quotes': ['error', 'single'],
+        'semi': ['error', 'always']
     }
-}
+};
