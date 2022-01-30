@@ -8,23 +8,23 @@
   list-style-type: none;
 
   a {
-      text-decoration: none;
-      color          : $letter_color;
-      transition     : $transition-time;
-      font-size      : 19px;
-      font-weight    : bold;
+    text-decoration: none;
+    color          : $letter_color;
+    transition     : $transition-time;
+    font-size      : 19px;
+    font-weight    : bold;
 
-      &.active {
-          color: $red;
-      }
+    &.active {
+        color: $red;
+    }
   }
 
   &:hover {
-      background-color: $grey;
-      transform       : scale(1.05);
+    background-color: $grey;
+    transform       : scale(1.05);
 
-      a:not(.active) {
-          color: black;
-      }
+    a:not(.active) {
+        color: black;
+    }
   }
 }

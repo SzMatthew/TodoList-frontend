@@ -3,6 +3,7 @@ import {IconContext} from 'react-icons';
 import {IoClose} from 'react-icons/io5';
 import {Link, useParams} from 'react-router-dom';
 import ProjectName from '../ProjectName/ProjectName';
+import AddNewProject from '../AddNewProject/AddNewProject';
 import './SideNav.scss';
 
 const SideNav = ({isOpen, setSideNavOpen}) => {
@@ -10,7 +11,7 @@ const SideNav = ({isOpen, setSideNavOpen}) => {
 
     useEffect(() => {
         getProjects();
-    });
+    }, []);
 
     const getProjects = () => {
         fetch('http://localhost:4000/projects')
@@ -37,8 +38,9 @@ const SideNav = ({isOpen, setSideNavOpen}) => {
             <h3 className='project-label'>PROJECTS:</h3>
             <ul>
                 {
-                    projects.map(project => <ProjectName key={project._id} project={project}/>)
+                    projects.map(project => <ProjectName key={project._id} project={project} />)
                 }
+                <AddNewProject appendNewProject={(project) => setProjects([...projects, project])}/>
             </ul>
         </nav>
     );

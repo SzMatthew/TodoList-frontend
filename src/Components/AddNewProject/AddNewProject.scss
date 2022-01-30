@@ -1,0 +1,26 @@
+@import '../../Variables.scss';
+
+.add-new-project-item {
+  list-style-type: none;
+  border-top: 1px solid $grey;
+  padding        : 10px $navbar-side-padding 8px 20px;
+  display        : flex;
+  align-items    : center;
+
+  &:hover {
+    cursor: pointer;
+
+    .add-new-project-name-label {
+      color: $letter_color;
+    }
+  }
+
+  .add-new-project-name-label {
+    margin-left: 6px;
+    font-size  : 17px;
+    color      : $grey;
+    font-weight: bold;
+
+    transition: $transition-time;
+  }
+}
