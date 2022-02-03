@@ -6,6 +6,9 @@
   transition     : $transition-time;
   border-radius  : 10px;
   list-style-type: none;
+  display        : flex;
+  align-items    : center;
+  justify-content: space-between;
 
   a {
     text-decoration: none;
@@ -20,7 +23,6 @@
   }
 
   svg {
-    float     : right;
     display   : none;
     color     : $mid-light_grey;
     transition: $transition-time;

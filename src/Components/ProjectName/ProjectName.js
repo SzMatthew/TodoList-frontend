@@ -10,7 +10,7 @@ const ProjectName = ({ project, onDeleteProject }) => {
   return (
     <li className='project_list_item'>
       <Link className={project._id === projectId ? 'active' : ''} to={`/projects/${project._id}`}>{project.title}</Link>
-      <IconContext.Provider value={{size: '22px'}}>
+      <IconContext.Provider value={{size: '20px'}}>
         <RiDeleteBinLine onClick={() => onDeleteProject(project._id)}/>
       </IconContext.Provider>
     </li>
