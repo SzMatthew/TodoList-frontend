@@ -49,7 +49,8 @@ const Todolist = () => {
                 if (notDoneTodosLength === 0)
                     setAddTaskOpen(true);
             }).catch(error => {
-                console.error(`There is no available database: ${error}`);
+                console.error(`There is a problem: ${error}`);
+                toast.error('Something went wrong!');
             });
     };
 
