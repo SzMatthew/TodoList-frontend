@@ -19,12 +19,28 @@
     }
   }
 
+  svg {
+    float     : right;
+    display   : none;
+    color     : $mid-light_grey;
+    transition: $transition-time;
+    cursor    : pointer;
+
+    &:hover {
+      color: $red;
+    }
+  }
+
   &:hover {
     background-color: $grey;
     transform       : scale(1.05);
 
     a:not(.active) {
         color: black;
+    }
+
+    svg {
+      display: block;
     }
   }
 }

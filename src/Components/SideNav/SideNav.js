@@ -5,6 +5,7 @@ import {Link, useParams} from 'react-router-dom';
 import ProjectName from '../ProjectName/ProjectName';
 import AddNewProject from '../AddNewProject/AddNewProject';
 import './SideNav.scss';
+import { toast } from 'react-toastify';
 
 const SideNav = ({isOpen, setSideNavOpen}) => {
     const [projects, setProjects] = useState([]);
@@ -30,6 +31,23 @@ const SideNav = ({isOpen, setSideNavOpen}) => {
             });
     };
 
+    const deleteProject = (projectIdToDelete) => {
+        fetch('http://localhost:4000/projects/' + projectIdToDelete, {
+            method: 'DELETE',
+            headers: {'Content-type': 'application/json'},
+        })
+        .then(res => res.json())
+            .then((data) => {
+                if (data === true) {
+                    getProjects();
+                    toast.success('TodoList successfully deleted!');
+                } else {
+                    console.error(data);
+                }
+        })
+        .catch((err) => {console.error(err);});
+      };
+
     return (
         <nav className={isOpen ? 'navbar navbar--after_open' : 'navbar navbar--before_close'}>
             <IconContext.Provider value={{className: 'close-icon', size: '25px'}}>
@@ -38,7 +56,7 @@ const SideNav = ({isOpen, setSideNavOpen}) => {
             <h3 className='project-label'>PROJECTS:</h3>
             <ul>
                 {
-                    projects.map(project => <ProjectName key={project._id} project={project} />)
+                    projects.map(project => <ProjectName key={project._id} project={project} onDeleteProject={deleteProject}/>)
                 }
                 <AddNewProject appendNewProject={(project) => setProjects([...projects, project])}/>
             </ul>

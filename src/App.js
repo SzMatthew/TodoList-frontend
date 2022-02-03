@@ -11,7 +11,7 @@ function App() {
     <TodoListProvider>
       <Switch>
         <Route exact path="/">
-          <Redirect to="/projects/60b8e95be0bf012f64f4e353" />
+          <Redirect to="/projects/60b8e969e0bf012f64f4e354" />
         </Route>
         <Route path="/projects/:projectId">
           <TodoList/>
