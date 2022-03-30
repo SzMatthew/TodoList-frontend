@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {IconContext} from 'react-icons';
 import {IoClose} from 'react-icons/io5';
-import {Link, useParams} from 'react-router-dom';
+import {Link, useParams, useHistory} from 'react-router-dom';
 import ProjectName from '../ProjectName/ProjectName';
 import AddNewProject from '../AddNewProject/AddNewProject';
 import './SideNav.scss';
@@ -9,6 +9,8 @@ import { toast } from 'react-toastify';
 
 const SideNav = ({isOpen, setSideNavOpen}) => {
     const [projects, setProjects] = useState([]);
+    const {projectId}             = useParams();
+    const history                 = useHistory();
 
     useEffect(() => {
         getProjects();
@@ -39,6 +41,12 @@ const SideNav = ({isOpen, setSideNavOpen}) => {
         .then(res => res.json())
             .then((data) => {
                 if (data === true) {
+                    if (projectId === projectIdToDelete) {
+                        const location = {
+                            pathname: '/projects',
+                        };
+                        history.replace(location);
+                    }
                     getProjects();
                     toast.success('TodoList successfully deleted!');
                 } else {
