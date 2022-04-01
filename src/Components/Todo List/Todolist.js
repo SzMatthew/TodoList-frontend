@@ -45,7 +45,7 @@ const Todolist = () => {
               throw new Error('Something went wrong!');
           }})
         .then(data => {
-          const sortedTodos = [...data.todos].sort((firstTodo, secondTodo) => (firstTodo.priority > secondTodo.priority) ? 1 : -1);
+          const sortedTodos = [...data.todos].sort((firstTodo, secondTodo) => (firstTodo.priority >= secondTodo.priority) ? 1 : -1);
           setTodoList(sortedTodos);
           setProjecTitle(data.projectTitle);
 
