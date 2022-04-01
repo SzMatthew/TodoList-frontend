@@ -31,6 +31,7 @@ const Todolist = () => {
     useEffect(() => {
       if (projectId) {
         getTodos();
+        setAddTaskOpen(false);
       }
     }, [projectId]);
 
