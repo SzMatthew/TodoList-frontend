@@ -3,6 +3,7 @@ import {BsFillFlagFill} from 'react-icons/bs';
 import {IconContext} from 'react-icons';
 import {useRef} from 'react';
 import {Row, Col} from 'react-grid-system';
+import KeyCodes from '../../KeyCodes';
 import './AddTodoPanel.scss';
 
 const AddTodoPanel = ({ setAddTaskOpen, addTaskOpen, AddTodo }) => {
@@ -31,7 +32,7 @@ const AddTodoPanel = ({ setAddTaskOpen, addTaskOpen, AddTodo }) => {
                             ref         = {todoRef}
                             placeholder = 'e.g. Learn Portugese every 2 days'
                             value       = {newTodo}
-                            onKeyPress  = {(event) => {if (event.charCode === 13 && newTodo) { AddNewTodo(); }}}
+                            onKeyPress  = {(event) => {if (event.charCode === KeyCodes.ENTER && newTodo) { AddNewTodo(); }}}
                             onChange    = {(event) => setNewTodo(event.target.value)}
                         />
                     </Col>

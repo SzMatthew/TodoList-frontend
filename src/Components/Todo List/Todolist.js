@@ -102,7 +102,7 @@ const Todolist = () => {
 
       todoList.map(todo => {
         if (todo._id === id) {
-          todo.done = true;
+          todo.done = !todo.done;
           todoToUpdate = todo;
         }
       });
