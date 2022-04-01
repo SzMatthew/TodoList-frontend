@@ -32,6 +32,7 @@ const Todolist = () => {
       if (projectId) {
         getTodos();
         setAddTaskOpen(false);
+        setDoneTodosOpen(false);
       }
     }, [projectId]);
 
