@@ -2,12 +2,23 @@
 
 .dropDown {
   position: absolute;
-  top: 5rem;
+  top: 6.5rem;
   right: 1rem;
   z-index: 1;
   display: flex;
-  background-color: $mid-light_grey;
+  background-color: $mid_grey;
   padding: 1rem;
-  border-radius: 15px;
+  border-radius: 10px;
   width: fit-content;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: -20%;
+    left: 70%;
+    margin-left: -0.6rem;
+    border-width: 0.6rem;
+    border-style: solid;
+    border-color: transparent transparent $mid_grey transparent;
+  }
 }

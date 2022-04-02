@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import {useTodoList} from '../../Contexts/todolist-context';
 import {useParams} from 'react-router-dom';
 import Todo from '../Todo/Todo';
@@ -27,7 +27,7 @@ const Todolist = () => {
     const [isSideNavOpen, setSideNavOpen]                 = useState(false);
     const [isProjectNameEditable, setProjectNameEditable] = useState(false);
     const [isProjectNameValid, setIsProjectNameValid]     = useState(true);
-    const projectNameErrorToastId                         = React.useRef(null);
+    const projectNameErrorToastId                         = useRef(null);
 
     useEffect(() => {
       if (projectId) {
