@@ -1,0 +1,32 @@
+@import '../../Variables.scss';
+
+.login {
+  &__label {
+    position: absolute;
+    z-index: 1;
+    top: 1rem;
+    right: 1rem;
+    color: $mid_grey;
+    font-size: 130%;
+    font-weight: 600;
+    background-color: $red;
+    padding: 0.7rem;
+    border-radius: 10px;
+    transition: $transition-time;
+    cursor: pointer;
+
+    &:hover {
+      color: $letter_color;
+    }
+  }
+
+  &__profile-picture {
+    position: absolute;
+    z-index: 1;
+    top: 1rem;
+    right: 1rem;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+  }
+}

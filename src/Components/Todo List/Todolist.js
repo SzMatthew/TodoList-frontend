@@ -5,6 +5,7 @@ import Todo from '../Todo/Todo';
 import AddTodoPanel from '../AddTodoPanel/AddTodoPanel';
 import NoTodoLabel from '../NoTodoLabel/NoTodoLabel';
 import SideNav from '../SideNav/SideNav';
+import Login from '../Login/Login';
 import OpenTodoList from '../OpenTodoList/OpenTodoList';
 import {AiOutlinePlus, AiOutlineEdit} from 'react-icons/ai';
 import {BsChevronDown} from 'react-icons/bs';
@@ -166,6 +167,7 @@ const Todolist = () => {
     return (
       <>
         <SideNav isOpen={isSideNavOpen} setSideNavOpen={setSideNavOpen}/>
+        <Login/>
         <Container fluid className='todolist_panel' onClick={handleSideNavOutsideClick}>
           <IconContext.Provider value={{className: 'hamburger-icon', size: '30px'}}>
             <GoThreeBars onClick={() => setSideNavOpen(!isSideNavOpen)}/>

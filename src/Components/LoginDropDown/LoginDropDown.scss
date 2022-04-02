@@ -1,0 +1,13 @@
+@import '../../Variables.scss';
+
+.dropDown {
+  position: absolute;
+  top: 5rem;
+  right: 1rem;
+  z-index: 1;
+  display: flex;
+  background-color: $mid-light_grey;
+  padding: 1rem;
+  border-radius: 15px;
+  width: fit-content;
+}
