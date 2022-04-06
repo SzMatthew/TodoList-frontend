@@ -1,12 +1,14 @@
 import React from 'react';
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
+import { useUser } from '../../Contexts/user-context';
 import './LoginDropDown.scss';
 
-const LoginDropDown = ({isLoggedIn, loginSuccess, loginError, logOut, handleLoginClick}) => {
+const LoginDropDown = ({ handleLoginClick }) => {
+  const { state: {user}, loginSuccess, loginError, logOut } = useUser();
   return (
     <div className='dropDown' >
       {
-        isLoggedIn
+        !!user
         ? <GoogleLogout
             clientId={'500105997849-mr28pnsqlc5vussqcv35lqf73q2u2t33.apps.googleusercontent.com'}
             buttonText={'Logout'}
