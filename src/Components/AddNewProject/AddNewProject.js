@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
+import {useUser} from '../../Contexts/user-context';
 import {IconContext} from 'react-icons';
 import {AiOutlinePlus} from 'react-icons/ai';
 import { toast } from 'react-toastify';
 import './AddNewProject.scss';
 
 const AddNewProject = ({appendNewProject}) => {
+  const {state: {user}} = useUser();
   const [isNewProjectNameInputVisible, setIsNewProjectNameInputVisible] = useState(false);
   const [isNewProjectNameValid, setIsNewProjectNameValid] = useState(true);
 
   const createProject = (projectName) => {
     const project = {
+      userId: user.userId,
       title: projectName
     };
 
@@ -20,9 +23,9 @@ const AddNewProject = ({appendNewProject}) => {
     })
       .then(response => {
           if (response.ok) {
-              return response.json();
+            return response.json();
           } else {
-              throw new Error('Something went wrong!');
+            throw new Error('Something went wrong!');
           }
       })
       .then(data => {

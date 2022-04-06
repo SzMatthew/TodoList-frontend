@@ -35,7 +35,7 @@ const useUser = () => {
 
     const loginSuccess = response => {
       setUser({
-        userId: response.tokenId,
+        userId: response.profileObj.googleId,
         name: response.profileObj.name,
         email: response.profileObj.email,
         imageUrl: response.profileObj.imageUrl

@@ -1,13 +1,15 @@
 import React, {useEffect, useState} from 'react';
+import {useUser} from '../../Contexts/user-context';
 import {IconContext} from 'react-icons';
 import {IoClose} from 'react-icons/io5';
-import {Link, useParams, useHistory} from 'react-router-dom';
+import {useParams, useHistory} from 'react-router-dom';
 import ProjectName from '../ProjectName/ProjectName';
 import AddNewProject from '../AddNewProject/AddNewProject';
 import './SideNav.scss';
 import { toast } from 'react-toastify';
 
 const SideNav = ({isOpen, setSideNavOpen}) => {
+    const {state: {user}}         = useUser();
     const [projects, setProjects] = useState([]);
     const {projectId}             = useParams();
     const history                 = useHistory();
@@ -17,7 +19,7 @@ const SideNav = ({isOpen, setSideNavOpen}) => {
     }, []);
 
     const getProjects = () => {
-        fetch('http://localhost:4000/projects')
+        fetch(`http://localhost:4000/projects?userId=${user.userId}`)
             .then(response => {
                 if (response.ok) {
                     return response.json();
