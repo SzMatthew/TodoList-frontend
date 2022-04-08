@@ -3,8 +3,8 @@ import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import { useUser } from '../../Contexts/user-context';
 import './LoginDropDown.scss';
 
-const LoginDropDown = ({ handleLoginClick }) => {
-  const { state: {user}, loginSuccess, loginError, logOut } = useUser();
+const LoginDropDown = () => {
+  const { state: {user}, loginSuccess, loginError, logOut, handleLoginClick } = useUser();
   return (
     <div className='dropDown' >
       {

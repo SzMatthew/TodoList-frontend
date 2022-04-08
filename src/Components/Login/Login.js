@@ -4,12 +4,7 @@ import { useUser } from '../../Contexts/user-context';
 import './Login.scss';
 
 const Login = () => {
-  const { state: {user} } = useUser();
-  const [isLogindrowDownOpen, setIsLoginDropDownOpen] = useState(false);
-
-  const handleLoginClick = () => {
-    setIsLoginDropDownOpen(!isLogindrowDownOpen);
-  };
+  const { state: {user, isLogindrowDownOpen}, handleLoginClick } = useUser();
 
   return (
     <div className='login'>
@@ -20,7 +15,7 @@ const Login = () => {
       }
       {
         isLogindrowDownOpen
-        ? <LoginDropDown handleLoginClick={handleLoginClick}/>
+        ? <LoginDropDown/>
         : null
       }
     </div>

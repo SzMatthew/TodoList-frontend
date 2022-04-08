@@ -5,7 +5,16 @@ const UserContext = createContext();
 const userReducer = (state, action) => {
     switch (action.type) {
         case 'SET_USER': {
-            return { user: action.payload };
+            return {
+                user: action.payload,
+                isLogindrowDownOpen: state.isLogindrowDownOpen
+            };
+        }
+        case 'SET_ISLOGINDROPDOWNOPEN': {
+            return {
+                user: state.user,
+                isLogindrowDownOpen: action.payload
+            };
         }
         default: {
             throw new Error(`Unsupported action type: ${action.type}`);
@@ -13,8 +22,13 @@ const userReducer = (state, action) => {
     }
 };
 
+const initialeState = {
+    user: null,
+    isLogindrowDownOpen: true
+};
+
 const UserProvider = props => {
-    const [state, dispatch] = useReducer(userReducer, {user: null});
+    const [state, dispatch] = useReducer(userReducer, initialeState);
     const value = useMemo(() => [state, dispatch], [state]);
     return <UserContext.Provider value={value} {...props} />;
 };
@@ -50,13 +64,18 @@ const useUser = () => {
       setUser(null);
     };
 
+    const handleLoginClick = () => {
+        dispatch({type: 'SET_ISLOGINDROPDOWNOPEN', payload: !state.isLogindrowDownOpen});
+    };
+
     return {
         state,
         dispatch,
         setUser,
         loginSuccess,
         loginError,
-        logOut
+        logOut,
+        handleLoginClick
     };
 };
 
