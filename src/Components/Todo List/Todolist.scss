@@ -26,37 +26,6 @@
 
     .todolist-container {
         padding-top: 50px;
-
-        .header {
-            display: flex;
-            align-items: center;
-            margin: 15px 10px 30px 15px;
-
-            &:hover {
-                .project-name-edit-icon {
-                    opacity: 0.7;
-                }
-            }
-
-            .project-name {
-                font-size: 26px;
-                cursor: default;
-            }
-
-            .project-name-edit-icon {
-                opacity: 0;
-                margin-top: 5px;
-                align-items: center;
-                margin-left: 15px;
-                color: $grey;
-                transition: $transition-time;
-
-                &:hover {
-                    color: $letter_color;
-                    cursor: pointer;
-                }
-            }
-        }
     
         .add-task-label {
             padding: 8px 10px;

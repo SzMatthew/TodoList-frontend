@@ -8,6 +8,7 @@ import NoTodoLabel from '../NoTodoLabel/NoTodoLabel';
 import SideNav from '../SideNav/SideNav';
 import Login from '../Login/Login';
 import OpenTodoList from '../OpenTodoList/OpenTodoList';
+import ProjectName from '../ProjectName';
 import {AiOutlinePlus, AiOutlineEdit} from 'react-icons/ai';
 import {BsChevronDown} from 'react-icons/bs';
 import {GoThreeBars} from 'react-icons/go';
@@ -194,12 +195,7 @@ const Todolist = () => {
                     ? <header className='header'>
                         <input type='text' className={isProjectNameValid ? '' : 'red-border'} defaultValue={projectTitle} onKeyDown={applyProjectNameEditing} onFocus={(event) => event.target.select()} onBlur={(event) => applyProjectNameEditing(event, true)} autoFocus/>
                       </header>
-                    : <header className='header'>
-                        <h3 className='project-name'>{ projectTitle }</h3>
-                          <IconContext.Provider value={{size: '24px', className: 'project-name-edit-icon'}}>
-                            <AiOutlineEdit onClick={() => setProjectNameEditable(true)}/>
-                          </IconContext.Provider>
-                      </header>
+                    : <ProjectName projectTitle={projectTitle}/>
                 }
                 {
                   todoList.filter(todo => todo.done === false).length
@@ -215,26 +211,26 @@ const Todolist = () => {
                           <AiOutlinePlus />
                         </IconContext.Provider>
                         <span>Add task</span>
-                    </div>
+                      </div>
                 }
 
                 <div className='done-todos-row' onClick={() => setDoneTodosOpen(!isDoneTodosOpen)}>
-                  <h4 className='done-todos-label' >Done TODOs</h4>
+                  <h4 className='done-todos-label'>Done TODOs</h4>
                   <IconContext.Provider value={{className: isDoneTodosOpen ? 'done-todos-arrow-icon upside-down' : 'done-todos-arrow-icon'}}>
                     <BsChevronDown />
                   </IconContext.Provider>
                 </div>
 
-              <div className={ isDoneTodosOpen ? 'done_todos_panel done_todos_panel--after-open' : 'done_todos_panel done_todos_panel--before-close'} id='doneTodosId'>
-              {
-                todoList.filter(todo => todo.done).length
-                  ? todoList.filter(todo => todo.done).map(todo =>
-                      <Todo key={todo._id} id={todo._id} text={todo.text} priority={todo.priority} done={todo.done} onDoneClick={updateTodoDone} onDeleteClick={deleteTodo}/>)
-                  : <NoTodoLabel text={'There is no TODO to list!'} />
-              }
-              </div>
-            </Col>
-          </Row>
+                <div className={ isDoneTodosOpen ? 'done_todos_panel done_todos_panel--after-open' : 'done_todos_panel done_todos_panel--before-close'} id='doneTodosId'>
+                {
+                  todoList.filter(todo => todo.done).length
+                    ? todoList.filter(todo => todo.done).map(todo =>
+                        <Todo key={todo._id} id={todo._id} text={todo.text} priority={todo.priority} done={todo.done} onDoneClick={updateTodoDone} onDeleteClick={deleteTodo}/>)
+                    : <NoTodoLabel text={'There is no TODO to list!'} />
+                }
+                </div>
+              </Col>
+            </Row>
           : <OpenTodoList />
         }
       </Container>
