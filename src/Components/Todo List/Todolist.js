@@ -195,7 +195,7 @@ const Todolist = () => {
                     ? <header className='header'>
                         <input type='text' className={isProjectNameValid ? '' : 'red-border'} defaultValue={projectTitle} onKeyDown={applyProjectNameEditing} onFocus={(event) => event.target.select()} onBlur={(event) => applyProjectNameEditing(event, true)} autoFocus/>
                       </header>
-                    : <ProjectName projectTitle={projectTitle}/>
+                    : <ProjectName projectTitle={projectTitle} setProjectNameEditable={setProjectNameEditable}/>
                 }
                 {
                   todoList.filter(todo => todo.done === false).length

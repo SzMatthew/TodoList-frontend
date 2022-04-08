@@ -3,7 +3,7 @@ import {AiOutlineEdit} from 'react-icons/ai';
 import {IconContext} from 'react-icons';
 import './SCSS/ProjectName.scss';
 
-const ProjectName = ({projectTitle}) => {
+const ProjectName = ({projectTitle, setProjectNameEditable}) => {
   return (
     <header className='header'>
       <h3 className='project-name'>{ projectTitle }</h3>
