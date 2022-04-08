@@ -5,6 +5,7 @@ import './LoginDropDown.scss';
 
 const LoginDropDown = () => {
   const { state: {user}, loginSuccess, loginError, logOut, handleLoginClick } = useUser();
+
   return (
     <div className='dropDown' >
       {

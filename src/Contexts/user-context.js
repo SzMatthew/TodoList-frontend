@@ -48,12 +48,13 @@ const useUser = () => {
     };
 
     const loginSuccess = response => {
-      setUser({
-        userId: response.profileObj.googleId,
-        name: response.profileObj.name,
-        email: response.profileObj.email,
-        imageUrl: response.profileObj.imageUrl
-      });
+        closeLoginDropDown();
+        setUser({
+            userId: response.profileObj.googleId,
+            name: response.profileObj.name,
+            email: response.profileObj.email,
+            imageUrl: response.profileObj.imageUrl
+        });
     };
 
     const loginError = response => {
@@ -68,6 +69,10 @@ const useUser = () => {
         dispatch({type: 'SET_ISLOGINDROPDOWNOPEN', payload: !state.isLogindrowDownOpen});
     };
 
+    const closeLoginDropDown = () => {
+        dispatch({type: 'SET_ISLOGINDROPDOWNOPEN', payload: false});
+    };
+
     return {
         state,
         dispatch,
@@ -75,7 +80,8 @@ const useUser = () => {
         loginSuccess,
         loginError,
         logOut,
-        handleLoginClick
+        handleLoginClick,
+        closeLoginDropDown
     };
 };
 

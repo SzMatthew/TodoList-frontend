@@ -21,7 +21,7 @@ setConfiguration({maxScreenClass: 'xxl'});
 
 const Todolist = () => {
   const {state: {todoList}, setTodoList}                = useTodoList();
-  const {state: {user}}                                 = useUser();
+  const {state: {user}, closeLoginDropDown}             = useUser();
   const {projectId}                                     = useParams();
   const [projectTitle, setProjecTitle]                  = useState('');
   const [addTaskOpen, setAddTaskOpen]                   = useState(false);
@@ -177,7 +177,7 @@ const Todolist = () => {
         : null
       }
       <Login/>
-      <Container fluid className='todolist_panel' onClick={handleSideNavOutsideClick}>
+      <Container fluid className='todolist_panel' onClick={() => {handleSideNavOutsideClick(); closeLoginDropDown();}}>
         {
           user
           ? <IconContext.Provider value={{className: 'hamburger-icon', size: '30px'}}>
