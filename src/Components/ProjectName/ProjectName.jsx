@@ -6,12 +6,21 @@ import './ProjectName.scss';
 
 const ProjectName = ({ project, onDeleteProject }) => {
   const { projectId } = useParams();
+  const history = useHistory();
+
+  const handleProjectNameClick = () => {
+    history.push(`/projects/${project._id}`);
+  };
+
+  const handleDeleteClick = () => {
+    onDeleteProject(project._id);
+  };
 
   return (
-    <li className='project_list_item'>
-      <Link className={project._id === projectId ? 'active' : ''} to={`/projects/${project._id}`}>{project.title}</Link>
+    <li className='project_list_item' onClick={handleProjectNameClick}>
+      <span className={project._id === projectId ? 'active' : ''}>{project.title}</span>
       <IconContext.Provider value={{ size: '20px' }}>
-        <RiDeleteBinLine onClick={() => onDeleteProject(project._id)}/>
+        <RiDeleteBinLine onClick={handleDeleteClick}/>
       </IconContext.Provider>
     </li>
   );

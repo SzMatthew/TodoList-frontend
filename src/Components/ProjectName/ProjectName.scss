@@ -9,9 +9,9 @@
   display        : flex;
   align-items    : center;
   justify-content: space-between;
+  cursor: pointer;
 
-  a {
-    text-decoration: none;
+  span {
     color          : $letter_color;
     transition     : $transition-time;
     font-size      : 19px;

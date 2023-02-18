@@ -58,7 +58,7 @@ const AddNewProject = ({ appendNewProject }) => {
     <li className='add-new-project-item' onClick={() => setIsNewProjectNameInputVisible(true)} onBlur={handleBur}>
       {
         isNewProjectNameInputVisible
-          ? <input type='text' className={isNewProjectNameValid ? '' : 'red-border'} autoFocus onKeyDown={handleKeydown}/>
+          ? <input type='text' autoFocus onKeyDown={handleKeydown}/>
           : <>
             <IconContext.Provider value={{ color: '#DE4C4A', size: '24px' }}>
               <AiOutlinePlus />
