@@ -1,10 +1,10 @@
 import React from 'react';
-import {shallow} from 'enzyme';
+import { shallow } from 'enzyme';
 import App from '../App.js';
 
 describe('App', () => {
-	it('renders', () => {
-		const wrapper = shallow(<App />);
-		expect(wrapper).toMatchSnapshot();
-	});
+  it('renders', () => {
+    const wrapper = shallow(<App />);
+    expect(wrapper).toMatchSnapshot();
+  });
 });

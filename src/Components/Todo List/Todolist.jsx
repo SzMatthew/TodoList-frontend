@@ -21,16 +21,16 @@ setConfiguration({ maxScreenClass: 'xxl' });
 
 
 const Todolist = () => {
-  const { state: { todoList }, setTodoList }                = useTodoList();
-  const { state: { user }, closeLoginDropDown }             = useUser();
-  const { projectId }                                     = useParams();
-  const [projectTitle, setProjecTitle]                  = useState('');
-  const [addTaskOpen, setAddTaskOpen]                   = useState(false);
-  const [isDoneTodosOpen, setDoneTodosOpen]             = useState(false);
-  const [isSideNavOpen, setSideNavOpen]                 = useState(false);
+  const { state: { todoList }, setTodoList } = useTodoList();
+  const { state: { user }, closeLoginDropDown } = useUser();
+  const { projectId } = useParams();
+  const [projectTitle, setProjecTitle] = useState('');
+  const [addTaskOpen, setAddTaskOpen] = useState(false);
+  const [isDoneTodosOpen, setDoneTodosOpen] = useState(false);
+  const [isSideNavOpen, setSideNavOpen] = useState(false);
   const [isProjectNameEditable, setProjectNameEditable] = useState(false);
-  const [isProjectNameValid, setIsProjectNameValid]     = useState(true);
-  const projectNameErrorToastId                         = useRef(null);
+  const [isProjectNameValid, setIsProjectNameValid] = useState(true);
+  const projectNameErrorToastId = useRef(null);
 
   useEffect(() => {
     if (projectId) {
@@ -44,9 +44,9 @@ const Todolist = () => {
     fetch(`http://localhost:4000/todos/getTodosByProjectId?projectId=${projectId}`)
       .then(response => {
         if (response.ok) {
-            return response.json();
+          return response.json();
         } else {
-            throw new Error('Something went wrong!');
+          throw new Error('Something went wrong!');
         }})
       .then(data => {
         const sortedTodos = [...data.todos].sort((firstTodo, secondTodo) => (firstTodo.priority >= secondTodo.priority) ? 1 : -1);
@@ -56,7 +56,7 @@ const Todolist = () => {
         const notDoneTodosLength = data.todos.filter(todo => todo.done === false).length;
 
         if (notDoneTodosLength === 0)
-            setAddTaskOpen(true);
+          setAddTaskOpen(true);
       }).catch(error => {
         console.error(`There is a problem: ${error}`);
         toast.error('Something went wrong!');
@@ -76,13 +76,13 @@ const Todolist = () => {
       headers: { 'Content-type': 'application/json' },
       body: JSON.stringify(todo)
     })
-    .then(res => res.json())
-    .then((data) => {
-      if (data._id) {
-        getTodos();
-      }
-    })
-    .catch((err) => {console.error(err);});
+      .then(res => res.json())
+      .then((data) => {
+        if (data._id) {
+          getTodos();
+        }
+      })
+      .catch((err) => {console.error(err);});
   };
 
   const deleteTodo = (id) => {
@@ -90,15 +90,15 @@ const Todolist = () => {
       method: 'DELETE',
       headers: { 'Content-type': 'application/json' },
     })
-    .then(res => res.json())
-    .then((data) => {
-      if (data === true) {
+      .then(res => res.json())
+      .then((data) => {
+        if (data === true) {
           getTodos();
-      } else {
+        } else {
           console.error(data);
-      }
-    })
-    .catch((err) => {console.error(err);});
+        }
+      })
+      .catch((err) => {console.error(err);});
   };
 
   const updateTodoDone = (id) => {
@@ -116,11 +116,11 @@ const Todolist = () => {
       headers: { 'Content-type': 'application/json' },
       body: JSON.stringify(todoToUpdate)
     })
-    .then(res => res.json())
-    .then((data) => {
-      getTodos();
-    })
-    .catch((err) => {console.error(err);});
+      .then(res => res.json())
+      .then((data) => {
+        getTodos();
+      })
+      .catch((err) => {console.error(err);});
   };
 
   const updateProjectTitle = (projectTitle) => {
@@ -135,15 +135,15 @@ const Todolist = () => {
         projectTitle: projectTitle
       })
     })
-    .then(res => res.json())
-    .then((data) => {
-      setProjecTitle(data.title);
-      toast.success('Project name updated successfully!');
-    })
-    .catch((err) => {
-      console.error(err);
-      toast.error('Something went wrong!');
-    });
+      .then(res => res.json())
+      .then((data) => {
+        setProjecTitle(data.title);
+        toast.success('Project name updated successfully!');
+      })
+      .catch((err) => {
+        console.error(err);
+        toast.error('Something went wrong!');
+      });
   };
 
   const handleSideNavOutsideClick = () => {
@@ -177,35 +177,35 @@ const Todolist = () => {
       <Container fluid className='todolist_panel' onClick={() => {handleSideNavOutsideClick(); closeLoginDropDown();}}>
         {
           user && <IconContext.Provider value={{ className: 'hamburger-icon', size: '30px' }}>
-              <GoThreeBars onClick={() => setSideNavOpen(!isSideNavOpen)}/>
-            </IconContext.Provider>
+            <GoThreeBars onClick={() => setSideNavOpen(!isSideNavOpen)}/>
+          </IconContext.Provider>
         }
         {
           projectId
-          ? <Row justify='center'>
+            ? <Row justify='center'>
               <Col xxl={5} xl={6} md={7} sm={10} xs={11} className='todolist-container'>
                 {
                   isProjectNameEditable
                     ? <header className='header'>
-                        <input type='text' className={isProjectNameValid ? '' : 'red-border'} defaultValue={projectTitle} onKeyDown={applyProjectNameEditing} onFocus={(event) => event.target.select()} onBlur={(event) => applyProjectNameEditing(event, true)} autoFocus/>
-                      </header>
+                      <input type='text' className={isProjectNameValid ? '' : 'red-border'} defaultValue={projectTitle} onKeyDown={applyProjectNameEditing} onFocus={(event) => event.target.select()} onBlur={(event) => applyProjectNameEditing(event, true)} autoFocus/>
+                    </header>
                     : <ProjectName projectTitle={projectTitle} setProjectNameEditable={setProjectNameEditable}/>
                 }
                 {
                   todoList.filter(todo => todo.done === false).length
                     ? todoList.filter(todo => todo.done === false).map(todo => (
-                        <Todo key={todo._id} id={todo._id} text={todo.text} priority={todo.priority} onDoneClick={updateTodoDone} onDeleteClick={deleteTodo}/>))
+                      <Todo key={todo._id} id={todo._id} text={todo.text} priority={todo.priority} onDoneClick={updateTodoDone} onDeleteClick={deleteTodo}/>))
                     : <NoTodoLabel text={'Add new TODOs!'}/>
                 }
                 {
                   addTaskOpen
                     ? <AddTodoPanel setAddTaskOpen={setAddTaskOpen} addTaskOpen={addTaskOpen} AddTodo={insertTodo}/>
                     : <div className={'add-task-label'} onClick={() => setAddTaskOpen(!addTaskOpen)}>
-                        <IconContext.Provider value={{ color: '#DE4C4A', size: '22px' }}>
-                          <AiOutlinePlus />
-                        </IconContext.Provider>
-                        <span>Add task</span>
-                      </div>
+                      <IconContext.Provider value={{ color: '#DE4C4A', size: '22px' }}>
+                        <AiOutlinePlus />
+                      </IconContext.Provider>
+                      <span>Add task</span>
+                    </div>
                 }
 
                 <div className='done-todos-row' onClick={() => setDoneTodosOpen(!isDoneTodosOpen)}>
@@ -216,16 +216,16 @@ const Todolist = () => {
                 </div>
 
                 <div className={ isDoneTodosOpen ? 'done_todos_panel done_todos_panel--after-open' : 'done_todos_panel done_todos_panel--before-close'} id='doneTodosId'>
-                {
-                  todoList.filter(todo => todo.done).length
-                    ? todoList.filter(todo => todo.done).map(todo =>
+                  {
+                    todoList.filter(todo => todo.done).length
+                      ? todoList.filter(todo => todo.done).map(todo =>
                         <Todo key={todo._id} id={todo._id} text={todo.text} priority={todo.priority} done={todo.done} onDoneClick={updateTodoDone} onDeleteClick={deleteTodo}/>)
-                    : <NoTodoLabel text={'There is no TODO to list!'} />
-                }
+                      : <NoTodoLabel text={'There is no TODO to list!'} />
+                  }
                 </div>
               </Col>
             </Row>
-          : <OpenTodoList />
+            : <OpenTodoList />
         }
       </Container>
     </>

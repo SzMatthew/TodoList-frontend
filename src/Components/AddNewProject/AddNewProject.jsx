@@ -22,18 +22,18 @@ const AddNewProject = ({ appendNewProject }) => {
       body: JSON.stringify(project)
     })
       .then(response => {
-          if (response.ok) {
-            return response.json();
-          } else {
-            throw new Error('Something went wrong!');
-          }
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Something went wrong!');
+        }
       })
       .then(data => {
         appendNewProject(data);
-          toast.success('Todolist added successfully!');
+        toast.success('Todolist added successfully!');
       })
       .catch((error) => {
-          console.error(`There is no available database: ${error}`);
+        console.error(`There is no available database: ${error}`);
       });
   };
 
@@ -60,11 +60,11 @@ const AddNewProject = ({ appendNewProject }) => {
         isNewProjectNameInputVisible
           ? <input type='text' className={isNewProjectNameValid ? '' : 'red-border'} autoFocus onKeyDown={handleKeydown}/>
           : <>
-              <IconContext.Provider value={{ color: '#DE4C4A', size: '24px' }}>
-                  <AiOutlinePlus />
-              </IconContext.Provider>
-              <span className='add-new-project-name-label'>Add New TodoList!</span>
-            </>
+            <IconContext.Provider value={{ color: '#DE4C4A', size: '24px' }}>
+              <AiOutlinePlus />
+            </IconContext.Provider>
+            <span className='add-new-project-name-label'>Add New TodoList!</span>
+          </>
       }
     </li>
   );

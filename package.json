@@ -26,7 +26,8 @@
     "eject": "react-scripts eject",
     "test:lint": "npm run lint:js && npm run lint:scss",
     "lint:js": "eslint --ext .js,.jsx .",
-    "lint:scss": "stylelint src/**/*.scss"
+    "lint:scss": "stylelint src/**/*.scss",
+    "lint:fix": "eslint --fix --ext .js,.jsx ."
   },
   "eslintConfig": {
     "extends": [

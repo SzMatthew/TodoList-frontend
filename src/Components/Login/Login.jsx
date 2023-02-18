@@ -10,8 +10,8 @@ const Login = () => {
     <div className='login'>
       {
         user
-        ? <img src={user.imageUrl} alt='Profile Picture' className='login__profile-picture' onClick={handleLoginClick} />
-        : <span className='login__label' onClick={handleLoginClick}>Login</span>
+          ? <img src={user.imageUrl} alt='Profile Picture' className='login__profile-picture' onClick={handleLoginClick} />
+          : <span className='login__label' onClick={handleLoginClick}>Login</span>
       }
       { isLogindrowDownOpen && <LoginDropDown/> }
     </div>
