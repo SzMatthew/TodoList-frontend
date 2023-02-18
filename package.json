@@ -15,10 +15,9 @@
     "react-grid-system": "^7.1.2",
     "react-icons": "^4.1.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.1",
+    "react-scripts": "5.0.1",
     "react-toastify": "^8.1.0",
-    "sass": "^1.49.0",
-    "web-vitals": "^0.2.4"
+    "sass": "^1.58.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -67,7 +66,7 @@
     ]
   },
   "devDependencies": {
-    "@wojtekmaj/enzyme-adapter-react-17": "^0.4.1",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.8.0",
     "eslint": "^7.32.0"
   }
 }

@@ -172,19 +172,13 @@ const Todolist = () => {
 
   return (
     <>
-      {
-        user
-        ? <SideNav isOpen={isSideNavOpen} setSideNavOpen={setSideNavOpen}/>
-        : null
-      }
+      { user && <SideNav isOpen={isSideNavOpen} setSideNavOpen={setSideNavOpen}/> }
       <Login/>
       <Container fluid className='todolist_panel' onClick={() => {handleSideNavOutsideClick(); closeLoginDropDown();}}>
         {
-          user
-          ? <IconContext.Provider value={{className: 'hamburger-icon', size: '30px'}}>
+          user && <IconContext.Provider value={{className: 'hamburger-icon', size: '30px'}}>
               <GoThreeBars onClick={() => setSideNavOpen(!isSideNavOpen)}/>
             </IconContext.Provider>
-          : null
         }
         {
           projectId
