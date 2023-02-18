@@ -16,7 +16,7 @@ const AddNewProject = ({ appendNewProject }) => {
       title: projectName
     };
 
-    fetch('http://localhost:4000/projects/insertProject', {
+    fetch(`${process.env.REACT_APP_BASE_URL}/projects/insertProject`, {
       method: 'POST',
       headers: { 'Content-type': 'application/json' },
       body: JSON.stringify(project)

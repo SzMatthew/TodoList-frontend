@@ -41,7 +41,7 @@ const Todolist = () => {
   }, [projectId]);
 
   const getTodos = () => {
-    fetch(`http://localhost:4000/todos/getTodosByProjectId?projectId=${projectId}`)
+    fetch(`${process.env.REACT_APP_BASE_URL}/todos/getTodosByProjectId?projectId=${projectId}`)
       .then(response => {
         if (response.ok) {
           return response.json();
@@ -71,7 +71,7 @@ const Todolist = () => {
       done: false
     };
 
-    fetch('http://localhost:4000/todos', {
+    fetch(`${process.env.REACT_APP_BASE_URL}/todos`, {
       method: 'POST',
       headers: { 'Content-type': 'application/json' },
       body: JSON.stringify(todo)
@@ -86,7 +86,7 @@ const Todolist = () => {
   };
 
   const deleteTodo = (id) => {
-    fetch('http://localhost:4000/todos/' + id, {
+    fetch(`${process.env.REACT_APP_BASE_URL}/todos/` + id, {
       method: 'DELETE',
       headers: { 'Content-type': 'application/json' },
     })
@@ -111,7 +111,7 @@ const Todolist = () => {
       }
     });
 
-    fetch('http://localhost:4000/todos', {
+    fetch(`${process.env.REACT_APP_BASE_URL}/todos`, {
       method: 'PUT',
       headers: { 'Content-type': 'application/json' },
       body: JSON.stringify(todoToUpdate)
@@ -126,7 +126,7 @@ const Todolist = () => {
   const updateProjectTitle = (projectTitle) => {
     if (!projectTitle) return;
 
-    fetch('http://localhost:4000/projects/updateProjectTitle', {
+    fetch(`${process.env.REACT_APP_BASE_URL}/projects/updateProjectTitle`, {
       method: 'PUT',
       headers: { 'Content-type': 'application/json' },
       body: JSON.stringify({

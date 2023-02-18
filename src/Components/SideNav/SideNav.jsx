@@ -19,7 +19,7 @@ const SideNav = ({ isOpen, setSideNavOpen }) => {
   }, []);
 
   const getProjects = () => {
-    fetch(`http://localhost:4000/projects?userId=${user.userId}`)
+    fetch(`${process.env.REACT_APP_BASE_URL}/projects?userId=${user.userId}`)
       .then(response => {
         if (response.ok) {
           return response.json();
@@ -36,7 +36,7 @@ const SideNav = ({ isOpen, setSideNavOpen }) => {
   };
 
   const deleteProject = (projectIdToDelete) => {
-    fetch('http://localhost:4000/projects/' + projectIdToDelete, {
+    fetch(`${process.env.REACT_APP_BASE_URL}/projects/${projectIdToDelete}`, {
       method: 'DELETE',
       headers: { 'Content-type': 'application/json' },
     })
