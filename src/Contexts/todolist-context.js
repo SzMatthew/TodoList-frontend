@@ -14,7 +14,7 @@ const todoListReducer = (state, action) => {
 };
 
 const TodoListProvider = props => {
-    const [state, dispatch] = useReducer(todoListReducer, {todoList: []});
+    const [state, dispatch] = useReducer(todoListReducer, { todoList: [] });
     const value = useMemo(() => [state, dispatch], [state]);
     return <TodoListContext.Provider value={value} {...props} />;
 };
@@ -29,7 +29,7 @@ const useTodoList = () => {
 
     const setTodoList = todoList => {
         if (state.todoList !== todoList) {
-            dispatch({type: 'SET_TODOLIST', payload: todoList});
+            dispatch({ type: 'SET_TODOLIST', payload: todoList });
         }
     };
 

@@ -4,7 +4,7 @@ import { useUser } from '../../Contexts/user-context';
 import './Login.scss';
 
 const Login = () => {
-  const { state: {user, isLogindrowDownOpen}, handleLoginClick } = useUser();
+  const { state: { user, isLogindrowDownOpen }, handleLoginClick } = useUser();
 
   return (
     <div className='login'>
@@ -13,11 +13,7 @@ const Login = () => {
         ? <img src={user.imageUrl} alt='Profile Picture' className='login__profile-picture' onClick={handleLoginClick} />
         : <span className='login__label' onClick={handleLoginClick}>Login</span>
       }
-      {
-        isLogindrowDownOpen
-        ? <LoginDropDown/>
-        : null
-      }
+      { isLogindrowDownOpen && <LoginDropDown/> }
     </div>
   );
 };

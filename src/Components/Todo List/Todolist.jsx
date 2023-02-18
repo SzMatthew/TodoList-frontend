@@ -1,7 +1,7 @@
-import React, {useEffect, useState, useRef} from 'react';
-import {useTodoList} from '../../Contexts/todolist-context';
-import {useUser} from '../../Contexts/user-context';
-import {useParams} from 'react-router-dom';
+import React, { useEffect, useState, useRef } from 'react';
+import { useTodoList } from '../../Contexts/todolist-context';
+import { useUser } from '../../Contexts/user-context';
+import { useParams } from 'react-router-dom';
 import Todo from '../Todo/Todo';
 import AddTodoPanel from '../AddTodoPanel/AddTodoPanel';
 import NoTodoLabel from '../NoTodoLabel/NoTodoLabel';
@@ -9,21 +9,21 @@ import SideNav from '../SideNav/SideNav';
 import Login from '../Login/Login';
 import OpenTodoList from '../OpenTodoList/OpenTodoList';
 import ProjectName from '../ProjectName';
-import {AiOutlinePlus, AiOutlineEdit} from 'react-icons/ai';
-import {BsChevronDown} from 'react-icons/bs';
-import {GoThreeBars} from 'react-icons/go';
-import {IconContext} from 'react-icons';
-import {setConfiguration, Container, Row, Col} from 'react-grid-system';
-import {toast} from 'react-toastify';
+import { AiOutlinePlus } from 'react-icons/ai';
+import { BsChevronDown } from 'react-icons/bs';
+import { GoThreeBars } from 'react-icons/go';
+import { IconContext } from 'react-icons';
+import { setConfiguration, Container, Row, Col } from 'react-grid-system';
+import { toast } from 'react-toastify';
 import './Todolist.scss';
 
-setConfiguration({maxScreenClass: 'xxl'});
+setConfiguration({ maxScreenClass: 'xxl' });
 
 
 const Todolist = () => {
-  const {state: {todoList}, setTodoList}                = useTodoList();
-  const {state: {user}, closeLoginDropDown}             = useUser();
-  const {projectId}                                     = useParams();
+  const { state: { todoList }, setTodoList }                = useTodoList();
+  const { state: { user }, closeLoginDropDown }             = useUser();
+  const { projectId }                                     = useParams();
   const [projectTitle, setProjecTitle]                  = useState('');
   const [addTaskOpen, setAddTaskOpen]                   = useState(false);
   const [isDoneTodosOpen, setDoneTodosOpen]             = useState(false);
@@ -73,7 +73,7 @@ const Todolist = () => {
 
     fetch('http://localhost:4000/todos', {
       method: 'POST',
-      headers: {'Content-type': 'application/json'},
+      headers: { 'Content-type': 'application/json' },
       body: JSON.stringify(todo)
     })
     .then(res => res.json())
@@ -88,7 +88,7 @@ const Todolist = () => {
   const deleteTodo = (id) => {
     fetch('http://localhost:4000/todos/' + id, {
       method: 'DELETE',
-      headers: {'Content-type': 'application/json'},
+      headers: { 'Content-type': 'application/json' },
     })
     .then(res => res.json())
     .then((data) => {
@@ -113,7 +113,7 @@ const Todolist = () => {
 
     fetch('http://localhost:4000/todos', {
       method: 'PUT',
-      headers: {'Content-type': 'application/json'},
+      headers: { 'Content-type': 'application/json' },
       body: JSON.stringify(todoToUpdate)
     })
     .then(res => res.json())
@@ -128,7 +128,7 @@ const Todolist = () => {
 
     fetch('http://localhost:4000/projects/updateProjectTitle', {
       method: 'PUT',
-      headers: {'Content-type': 'application/json'},
+      headers: { 'Content-type': 'application/json' },
       body: JSON.stringify({
         userId: user.userId,
         projectId: projectId,
@@ -176,7 +176,7 @@ const Todolist = () => {
       <Login/>
       <Container fluid className='todolist_panel' onClick={() => {handleSideNavOutsideClick(); closeLoginDropDown();}}>
         {
-          user && <IconContext.Provider value={{className: 'hamburger-icon', size: '30px'}}>
+          user && <IconContext.Provider value={{ className: 'hamburger-icon', size: '30px' }}>
               <GoThreeBars onClick={() => setSideNavOpen(!isSideNavOpen)}/>
             </IconContext.Provider>
         }
@@ -201,7 +201,7 @@ const Todolist = () => {
                   addTaskOpen
                     ? <AddTodoPanel setAddTaskOpen={setAddTaskOpen} addTaskOpen={addTaskOpen} AddTodo={insertTodo}/>
                     : <div className={'add-task-label'} onClick={() => setAddTaskOpen(!addTaskOpen)}>
-                        <IconContext.Provider value={{color: '#DE4C4A', size: '22px'}}>
+                        <IconContext.Provider value={{ color: '#DE4C4A', size: '22px' }}>
                           <AiOutlinePlus />
                         </IconContext.Provider>
                         <span>Add task</span>
@@ -210,7 +210,7 @@ const Todolist = () => {
 
                 <div className='done-todos-row' onClick={() => setDoneTodosOpen(!isDoneTodosOpen)}>
                   <h4 className='done-todos-label'>Done TODOs</h4>
-                  <IconContext.Provider value={{className: isDoneTodosOpen ? 'done-todos-arrow-icon upside-down' : 'done-todos-arrow-icon'}}>
+                  <IconContext.Provider value={{ className: isDoneTodosOpen ? 'done-todos-arrow-icon upside-down' : 'done-todos-arrow-icon' }}>
                     <BsChevronDown />
                   </IconContext.Provider>
                 </div>

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import {useUser} from '../../Contexts/user-context';
-import {IconContext} from 'react-icons';
-import {AiOutlinePlus} from 'react-icons/ai';
+import { useUser } from '../../Contexts/user-context';
+import { IconContext } from 'react-icons';
+import { AiOutlinePlus } from 'react-icons/ai';
 import { toast } from 'react-toastify';
 import './AddNewProject.scss';
 
-const AddNewProject = ({appendNewProject}) => {
-  const {state: {user}} = useUser();
+const AddNewProject = ({ appendNewProject }) => {
+  const { state: { user } } = useUser();
   const [isNewProjectNameInputVisible, setIsNewProjectNameInputVisible] = useState(false);
   const [isNewProjectNameValid, setIsNewProjectNameValid] = useState(true);
 
@@ -18,7 +18,7 @@ const AddNewProject = ({appendNewProject}) => {
 
     fetch('http://localhost:4000/projects/insertProject', {
       method: 'POST',
-      headers: {'Content-type': 'application/json'},
+      headers: { 'Content-type': 'application/json' },
       body: JSON.stringify(project)
     })
       .then(response => {
@@ -60,7 +60,7 @@ const AddNewProject = ({appendNewProject}) => {
         isNewProjectNameInputVisible
           ? <input type='text' className={isNewProjectNameValid ? '' : 'red-border'} autoFocus onKeyDown={handleKeydown}/>
           : <>
-              <IconContext.Provider value={{color: '#DE4C4A', size: '24px'}}>
+              <IconContext.Provider value={{ color: '#DE4C4A', size: '24px' }}>
                   <AiOutlinePlus />
               </IconContext.Provider>
               <span className='add-new-project-name-label'>Add New TodoList!</span>

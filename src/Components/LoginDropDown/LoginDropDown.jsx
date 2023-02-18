@@ -4,7 +4,7 @@ import { useUser } from '../../Contexts/user-context';
 import './LoginDropDown.scss';
 
 const LoginDropDown = () => {
-  const { state: {user}, loginSuccess, loginError, logOut, handleLoginClick } = useUser();
+  const { state: { user }, loginSuccess, loginError, logOut, handleLoginClick } = useUser();
 
   return (
     <div className='dropDown' >
@@ -15,7 +15,7 @@ const LoginDropDown = () => {
             buttonText={'Logout'}
             onLogoutSuccess={logOut}
             textInputProps={{
-              onBlur  : {handleLoginClick}
+              onBlur  : { handleLoginClick }
             }}
           ></GoogleLogout>
         : <GoogleLogin
@@ -25,7 +25,7 @@ const LoginDropDown = () => {
             onFailure={loginError}
             isSignedIn={true}
             textInputProps={{
-              onBlur  : {handleLoginClick}
+              onBlur  : { handleLoginClick }
             }}
             cookiePolicy={'single_host_origin'}
           />

@@ -1,7 +1,7 @@
 import React from 'react';
 import './NoTodoLabel.scss';
 
-const NoTodoLabel = ({text}) => {
+const NoTodoLabel = ({ text }) => {
     return (
         <div className='noTodoWrapper'>
             <span>{text}</span>

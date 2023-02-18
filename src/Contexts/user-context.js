@@ -43,7 +43,7 @@ const useUser = () => {
 
     const setUser = user => {
         if (state.user !== user) {
-            dispatch({type: 'SET_USER', payload: user});
+            dispatch({ type: 'SET_USER', payload: user });
         }
     };
 
@@ -66,11 +66,11 @@ const useUser = () => {
     };
 
     const handleLoginClick = () => {
-        dispatch({type: 'SET_ISLOGINDROPDOWNOPEN', payload: !state.isLogindrowDownOpen});
+        dispatch({ type: 'SET_ISLOGINDROPDOWNOPEN', payload: !state.isLogindrowDownOpen });
     };
 
     const closeLoginDropDown = () => {
-        dispatch({type: 'SET_ISLOGINDROPDOWNOPEN', payload: false});
+        dispatch({ type: 'SET_ISLOGINDROPDOWNOPEN', payload: false });
     };
 
     return {

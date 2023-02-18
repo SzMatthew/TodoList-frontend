@@ -1,7 +1,7 @@
 import React from 'react';
-import {Link, useParams, useHistory} from 'react-router-dom';
-import {IconContext} from 'react-icons';
-import {RiDeleteBinLine} from 'react-icons/ri';
+import { Link, useParams, useHistory } from 'react-router-dom';
+import { IconContext } from 'react-icons';
+import { RiDeleteBinLine } from 'react-icons/ri';
 import './ProjectName.scss';
 
 const ProjectName = ({ project, onDeleteProject }) => {
@@ -10,7 +10,7 @@ const ProjectName = ({ project, onDeleteProject }) => {
   return (
     <li className='project_list_item'>
       <Link className={project._id === projectId ? 'active' : ''} to={`/projects/${project._id}`}>{project.title}</Link>
-      <IconContext.Provider value={{size: '20px'}}>
+      <IconContext.Provider value={{ size: '20px' }}>
         <RiDeleteBinLine onClick={() => onDeleteProject(project._id)}/>
       </IconContext.Provider>
     </li>

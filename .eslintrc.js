@@ -17,10 +17,11 @@ module.exports = {
     'rules': {
         'keyword-spacing': 'error',
         'space-before-blocks': 'error',
-        'no-trailing-spaces': 'error',
+        'no-trailing-spaces': 'warn',
         'no-multiple-empty-lines': 'error',
         'react/prop-types': 0,
         'quotes': ['error', 'single'],
-        'semi': ['error', 'always']
+        'semi': ['error', 'always'],
+        'object-curly-spacing': ['warn', 'always']
     }
 };

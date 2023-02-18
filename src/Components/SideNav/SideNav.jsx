@@ -1,17 +1,17 @@
-import React, {useEffect, useState} from 'react';
-import {useUser} from '../../Contexts/user-context';
-import {IconContext} from 'react-icons';
-import {IoClose} from 'react-icons/io5';
-import {useParams, useHistory} from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useUser } from '../../Contexts/user-context';
+import { IconContext } from 'react-icons';
+import { IoClose } from 'react-icons/io5';
+import { useParams, useHistory } from 'react-router-dom';
 import ProjectName from '../ProjectName/ProjectName';
 import AddNewProject from '../AddNewProject/AddNewProject';
 import './SideNav.scss';
 import { toast } from 'react-toastify';
 
-const SideNav = ({isOpen, setSideNavOpen}) => {
-    const {state: {user}}         = useUser();
+const SideNav = ({ isOpen, setSideNavOpen }) => {
+    const { state: { user } }         = useUser();
     const [projects, setProjects] = useState([]);
-    const {projectId}             = useParams();
+    const { projectId }             = useParams();
     const history                 = useHistory();
 
     useEffect(() => {
@@ -38,7 +38,7 @@ const SideNav = ({isOpen, setSideNavOpen}) => {
     const deleteProject = (projectIdToDelete) => {
         fetch('http://localhost:4000/projects/' + projectIdToDelete, {
             method: 'DELETE',
-            headers: {'Content-type': 'application/json'},
+            headers: { 'Content-type': 'application/json' },
         })
         .then(res => res.json())
             .then((data) => {
@@ -60,7 +60,7 @@ const SideNav = ({isOpen, setSideNavOpen}) => {
 
     return (
         <nav className={isOpen ? 'navbar navbar--after_open' : 'navbar navbar--before_close'}>
-            <IconContext.Provider value={{className: 'close-icon', size: '25px'}}>
+            <IconContext.Provider value={{ className: 'close-icon', size: '25px' }}>
                 <IoClose onClick={() => setSideNavOpen(!isOpen)}/>
             </IconContext.Provider>
             <h3 className='project-label'>PROJECTS:</h3>
