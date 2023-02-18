@@ -18,6 +18,7 @@
         color: $grey;
         transition: 0.2s;
         cursor: pointer;
+        z-index: 1;
 
         &:hover {
             color: $letter_color;

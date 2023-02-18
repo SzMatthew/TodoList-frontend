@@ -17,7 +17,7 @@ const LoginDropDown = () => {
             textInputProps={{
               onBlur  : { handleLoginClick }
             }}
-          ></GoogleLogout>
+          />
           : <GoogleLogin
             clientId={'500105997849-mr28pnsqlc5vussqcv35lqf73q2u2t33.apps.googleusercontent.com'}
             buttonText="Sign In with Google"
