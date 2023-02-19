@@ -9,7 +9,7 @@ import './SideNav.scss';
 import { toast } from 'react-toastify';
 
 const SideNav = ({ isOpen, setSideNavOpen }) => {
-  const { state: { user } } = useUser();
+  const { user } = useUser();
   const [projects, setProjects] = useState([]);
   const { projectId } = useParams();
   const history = useHistory();

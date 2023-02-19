@@ -1,26 +1,8 @@
-import React, { createContext, useContext, useMemo, useReducer } from 'react';
+import React, { createContext, useContext, useMemo, useState } from 'react';
+import jwt_decode from 'jwt-decode';
 
 const UserContext = createContext();
 
-const userReducer = (state, action) => {
-  switch (action.type) {
-  case 'SET_USER': {
-    return {
-      user: action.payload,
-      isLogindrowDownOpen: state.isLogindrowDownOpen
-    };
-  }
-  case 'SET_ISLOGINDROPDOWNOPEN': {
-    return {
-      user: state.user,
-      isLogindrowDownOpen: action.payload
-    };
-  }
-  default: {
-    throw new Error(`Unsupported action type: ${action.type}`);
-  }
-  }
-};
 
 const initialeState = {
   user: null,
@@ -28,32 +10,26 @@ const initialeState = {
 };
 
 const UserProvider = props => {
-  const [state, dispatch] = useReducer(userReducer, initialeState);
-  const value = useMemo(() => [state, dispatch], [state]);
+  const [state, setState] = useState(initialeState);
+  const value = useMemo(() => [state, setState], [state]);
   return <UserContext.Provider value={value} {...props} />;
 };
 
 const useUser = () => {
-  const context = useContext(UserContext);
-
-  if (!context) {
-    throw new Error('useUser must be used within a TodoListProvider');
-  }
-  const [state, dispatch] = context;
+  const [state, setState] = useContext(UserContext);
 
   const setUser = user => {
-    if (state.user !== user) {
-      dispatch({ type: 'SET_USER', payload: user });
-    }
+    setState({ isLogindrowDownOpen: false, user: user });
   };
 
   const loginSuccess = response => {
-    closeLoginDropDown();
+    const decodedCredential = jwt_decode(response.credential);
+    console.log('🚀 ~ decodedCredential', decodedCredential);
     setUser({
-      userId: response.profileObj.googleId,
-      name: response.profileObj.name,
-      email: response.profileObj.email,
-      imageUrl: response.profileObj.imageUrl
+      email: decodedCredential.email,
+      name: decodedCredential.name,
+      imageUrl: decodedCredential.picture,
+      userId: decodedCredential.sub
     });
   };
 
@@ -66,16 +42,16 @@ const useUser = () => {
   };
 
   const handleLoginClick = () => {
-    dispatch({ type: 'SET_ISLOGINDROPDOWNOPEN', payload: !state.isLogindrowDownOpen });
+    setState({ user: state.user, isLogindrowDownOpen: !state.isLogindrowDownOpen });
   };
 
   const closeLoginDropDown = () => {
-    dispatch({ type: 'SET_ISLOGINDROPDOWNOPEN', payload: false });
+    setState({ user: state.user, isLogindrowDownOpen: false });
   };
 
   return {
-    state,
-    dispatch,
+    user: state.user,
+    isLogindrowDownOpen: state.isLogindrowDownOpen,
     setUser,
     loginSuccess,
     loginError,

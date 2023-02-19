@@ -1,34 +1,20 @@
 import React from 'react';
-import { GoogleLogin, GoogleLogout } from 'react-google-login';
+import { GoogleLogin } from '@react-oauth/google';
 import { useUser } from '../../Contexts/user-context';
 import './LoginDropDown.scss';
 
 const LoginDropDown = () => {
-  const { state: { user }, loginSuccess, loginError, logOut, handleLoginClick } = useUser();
+  const { user, loginSuccess, loginError, logOut, handleLoginClick } = useUser();
 
   return (
     <div className='dropDown' >
       {
-        !!user
-          ? <GoogleLogout
-            clientId={'500105997849-mr28pnsqlc5vussqcv35lqf73q2u2t33.apps.googleusercontent.com'}
-            buttonText={'Logout'}
-            onLogoutSuccess={logOut}
-            textInputProps={{
-              onBlur  : { handleLoginClick }
-            }}
-          />
-          : <GoogleLogin
-            clientId={'500105997849-mr28pnsqlc5vussqcv35lqf73q2u2t33.apps.googleusercontent.com'}
-            buttonText="Sign In with Google"
-            onSuccess={loginSuccess}
-            onFailure={loginError}
-            isSignedIn={true}
-            textInputProps={{
-              onBlur  : { handleLoginClick }
-            }}
-            cookiePolicy={'single_host_origin'}
-          />
+        !user && <GoogleLogin
+          onSuccess={loginSuccess}
+          onFailure={loginError}
+          useOneTap
+          auto_select
+        />
       }
     </div>
   );

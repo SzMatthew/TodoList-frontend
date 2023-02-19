@@ -22,7 +22,7 @@ setConfiguration({ maxScreenClass: 'xxl' });
 
 const Todolist = () => {
   const { state: { todoList }, setTodoList } = useTodoList();
-  const { state: { user }, closeLoginDropDown } = useUser();
+  const { user, closeLoginDropDown } = useUser();
   const { projectId } = useParams();
   const [projectTitle, setProjecTitle] = useState('');
   const [addTaskOpen, setAddTaskOpen] = useState(false);

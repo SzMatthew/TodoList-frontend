@@ -1,7 +1,10 @@
 module.exports = {
-  'env': {
-    'browser': true,
-    'es2021': true
+  env: {
+    browser: true,
+    commonjs: true,
+    es6: true,
+    jest: true,
+    node: true,
   },
   'extends': 'plugin:react/recommended',
   'parserOptions': {

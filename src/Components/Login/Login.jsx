@@ -4,7 +4,7 @@ import { useUser } from '../../Contexts/user-context';
 import './Login.scss';
 
 const Login = () => {
-  const { state: { user, isLogindrowDownOpen }, handleLoginClick } = useUser();
+  const { user, isLogindrowDownOpen, handleLoginClick } = useUser();
 
   return (
     <div className='login'>

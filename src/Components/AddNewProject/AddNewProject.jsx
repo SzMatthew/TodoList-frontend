@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import './AddNewProject.scss';
 
 const AddNewProject = ({ appendNewProject }) => {
-  const { state: { user } } = useUser();
+  const { user } = useUser();
   const [isNewProjectNameInputVisible, setIsNewProjectNameInputVisible] = useState(false);
   const [isNewProjectNameValid, setIsNewProjectNameValid] = useState(true);
 
