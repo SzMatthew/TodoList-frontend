@@ -4,12 +4,13 @@ import { IconContext } from 'react-icons';
 import { RiDeleteBinLine } from 'react-icons/ri';
 import './ProjectName.scss';
 
-const ProjectName = ({ project, onDeleteProject }) => {
+const ProjectName = ({ project, onDeleteProject, setSideNavOpen }) => {
   const { projectId } = useParams();
   const history = useHistory();
 
   const handleProjectNameClick = () => {
     history.push(`/projects/${project._id}`);
+    setSideNavOpen(false);
   };
 
   const handleDeleteClick = () => {

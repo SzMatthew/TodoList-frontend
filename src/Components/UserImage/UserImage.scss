@@ -1,0 +1,13 @@
+@import '../../Variables.scss';
+
+.userImage {
+  &__profile-picture {
+    position: absolute;
+    z-index: 1;
+    top: 1.5rem;
+    right: 2rem;
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+  }
+}

@@ -66,7 +66,7 @@ const SideNav = ({ isOpen, setSideNavOpen }) => {
       <h3 className='project-label'>PROJECTS:</h3>
       <ul>
         {
-          projects.map(project => <ProjectName key={project._id} project={project} onDeleteProject={deleteProject}/>)
+          projects.map(project => <ProjectName key={project._id} project={project} onDeleteProject={deleteProject} setSideNavOpen={setSideNavOpen}/>)
         }
         <AddNewProject appendNewProject={(project) => setProjects([...projects, project])}/>
       </ul>

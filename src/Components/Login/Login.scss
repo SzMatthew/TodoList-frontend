@@ -1,34 +1,17 @@
 @import '../../Variables.scss';
 
 .login {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #1F1F1F;
 
-  &__label {
-    position: absolute;
-    z-index: 1;
-    top: 2rem;
-    right: 3rem;
-    color: $mid_grey;
-    font-size: 130%;
-    font-weight: 600;
-    background-color: $red;
-    padding: 0.7rem;
-    border-radius: 10px;
-    transition: $transition-time;
-    cursor: pointer;
-
-    &:hover {
-      color: $letter_color;
-    }
+  &__img {
+    height: 30%;
+    max-width: 80%;
+    margin-bottom: 8rem
   }
-
-  &__profile-picture {
-    position: absolute;
-    z-index: 1;
-    top: 1.5rem;
-    right: 2rem;
-    height: 35px;
-    width: 35px;
-    border-radius: 50%;
-    cursor: pointer;
-  }
-}
+};
