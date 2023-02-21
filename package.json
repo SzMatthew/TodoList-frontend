@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^12.5.0",
     "bootstrap": "^5.0.1",
     "enzyme": "^3.11.0",
+    "js-cookie": "^3.0.1",
     "jwt-decode": "^3.1.2",
     "react": "^17.0.1",
     "react-bootstrap": "^1.6.0",
@@ -69,6 +70,6 @@
   },
   "devDependencies": {
     "@wojtekmaj/enzyme-adapter-react-17": "^0.8.0",
-    "eslint": "^7.32.0"
+    "eslint": "^8.34.0"
   }
 }

@@ -4,19 +4,26 @@ import Login from './Components/Login/Login';
 import { useUser } from './Contexts/user-context';
 import { TodoListProvider } from './Contexts/todolist-context';
 import { Switch, Route, Redirect, useHistory } from 'react-router-dom';
+import Cookies from 'js-cookie';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import jwt_decode from 'jwt-decode';
+
 import './Global.scss';
 
 const App = () => {
   const history = useHistory();
-  const { user } = useUser();
+  const { user, setUser } = useUser();
 
   useEffect(() => {
-    if (!user) {
+    const userInCookies = JSON.parse(Cookies.get('user') ?? null);
+
+    if (!user && !userInCookies) {
       history.push('/login');
+    } else if (userInCookies) {
+      setUser(jwt_decode(userInCookies.credential));
     }
-  }, [user]);
+  }, []);
 
   return (
     <TodoListProvider>

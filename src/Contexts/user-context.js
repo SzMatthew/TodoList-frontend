@@ -18,19 +18,18 @@ const UserProvider = props => {
 const useUser = () => {
   const [state, setState] = useContext(UserContext);
 
-  const setUser = user => {
-    setState({ isLogindrowDownOpen: false, user: user });
+  const setUser = decodedToken => {
+    setState({ isLogindrowDownOpen: false, user: {
+      email: decodedToken.email,
+      name: decodedToken.name,
+      imageUrl: decodedToken.picture,
+      userId: decodedToken.sub
+    } });
   };
 
   const loginSuccess = response => {
     const decodedCredential = jwt_decode(response.credential);
-    console.log('🚀 ~ decodedCredential', decodedCredential);
-    setUser({
-      email: decodedCredential.email,
-      name: decodedCredential.name,
-      imageUrl: decodedCredential.picture,
-      userId: decodedCredential.sub
-    });
+    setUser(decodedCredential);
   };
 
   const loginError = response => {
