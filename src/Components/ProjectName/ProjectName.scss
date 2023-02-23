@@ -31,6 +31,11 @@
     &:hover {
       color: $red;
     }
+
+    @media (max-width: 768px) {
+      display   : block;
+      color: $lightest_grey;
+    }
   }
 
   &:hover {
