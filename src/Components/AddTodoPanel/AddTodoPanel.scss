@@ -21,6 +21,7 @@ input{
             border-radius: 6px;
             border: 2px solid transparent;
             transition: 0.2s;
+            padding: 8px 1px;
 
             &:hover{
                 border: 2px solid $lightest_grey;

@@ -32,6 +32,7 @@ button{
     color: $lightest_grey;
     transition: 0.3s;
     font-size: 17px;
+    cursor: pointer;
 
     &:hover{
         color: $letter_color;
@@ -39,12 +40,13 @@ button{
 
     &.red{
         background-color: $red;
-        color: $letter_color;
+        color: $mid_grey;
         font-weight: bold;
 
         &:disabled{
             background-color: $dark-red;
-            color: $lightest_grey;
+            color: $mid_grey;
+            cursor: default;
         }
     }
 }
