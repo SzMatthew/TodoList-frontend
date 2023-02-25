@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { useUser } from '../../Contexts/user-context';
+import { useProjects } from '../../Contexts/projects-context';
 import { IconContext } from 'react-icons';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { toast } from 'react-toastify';
 import './AddNewProject.scss';
 
-const AddNewProject = ({ appendNewProject }) => {
+const AddNewProject = () => {
   const { user } = useUser();
+  const { addNewProject } = useProjects();
+
   const [isNewProjectNameInputVisible, setIsNewProjectNameInputVisible] = useState(false);
   const [isNewProjectNameValid, setIsNewProjectNameValid] = useState(true);
 
@@ -29,7 +32,7 @@ const AddNewProject = ({ appendNewProject }) => {
         }
       })
       .then(data => {
-        appendNewProject(data);
+        addNewProject(data);
         toast.success('Todolist added successfully!');
       })
       .catch((error) => {

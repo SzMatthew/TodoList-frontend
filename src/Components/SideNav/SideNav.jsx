@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useUser } from '../../Contexts/user-context';
 import { IconContext } from 'react-icons';
 import { IoClose } from 'react-icons/io5';
 import { useParams, useHistory } from 'react-router-dom';
+import { useProjects } from '../../Contexts/projects-context';
 import ProjectName from '../ProjectName/ProjectName';
 import AddNewProject from '../AddNewProject/AddNewProject';
 import './SideNav.scss';
@@ -10,9 +11,9 @@ import { toast } from 'react-toastify';
 
 const SideNav = ({ isOpen, setSideNavOpen }) => {
   const { user } = useUser();
-  const [projects, setProjects] = useState([]);
   const { projectId } = useParams();
   const history = useHistory();
+  const { projects, setProjects } = useProjects();
 
   useEffect(() => {
     getProjects();
@@ -64,12 +65,20 @@ const SideNav = ({ isOpen, setSideNavOpen }) => {
         <IoClose onClick={() => setSideNavOpen(!isOpen)}/>
       </IconContext.Provider>
       <h3 className='project-label'>PROJECTS:</h3>
-      <ul>
-        {
-          projects.map(project => <ProjectName key={project._id} project={project} onDeleteProject={deleteProject} setSideNavOpen={setSideNavOpen}/>)
-        }
-        <AddNewProject appendNewProject={(project) => setProjects([...projects, project])}/>
-      </ul>
+      {projects && (
+        <ul>
+          {
+            projects.map(project =>
+              <ProjectName
+                key={project._id}
+                project={project}
+                onDeleteProject={deleteProject}
+                setSideNavOpen={setSideNavOpen}
+              />)
+          }
+          <AddNewProject />
+        </ul>
+      )}
     </nav>
   );
 };

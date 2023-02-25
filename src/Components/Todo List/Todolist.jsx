@@ -56,7 +56,7 @@ const Todolist = () => {
         const notDoneTodosLength = data.todos.filter(todo => todo.done === false).length;
 
         if (notDoneTodosLength === 0)
-          setAddTaskOpen(true);
+        {setAddTaskOpen(true);}
       }).catch(error => {
         console.error(`There is a problem: ${error}`);
         toast.error('Something went wrong!');
@@ -124,7 +124,7 @@ const Todolist = () => {
   };
 
   const updateProjectTitle = (projectTitle) => {
-    if (!projectTitle) return;
+    if (!projectTitle) {return;}
 
     fetch(`${process.env.REACT_APP_BASE_URL}/projects/updateProjectTitle`, {
       method: 'PUT',
@@ -148,7 +148,7 @@ const Todolist = () => {
 
   const handleSideNavOutsideClick = () => {
     if (isSideNavOpen)
-      setSideNavOpen(false);
+    {setSideNavOpen(false);}
   };
 
   const applyProjectNameEditing = (event, onBlur) => {
