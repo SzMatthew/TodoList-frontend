@@ -49,7 +49,8 @@ const Todolist = () => {
           throw new Error('Something went wrong!');
         }})
       .then(data => {
-        const sortedTodos = [...data.todos].sort((firstTodo, secondTodo) => (firstTodo.priority >= secondTodo.priority) ? 1 : -1);
+        const sortedTodos = [...data.todos]
+          .sort((firstTodo, secondTodo) => (firstTodo.priority >= secondTodo.priority) ? 1 : -1);
         setTodoList(sortedTodos);
         setProjecTitle(data.projectTitle);
 
@@ -194,7 +195,14 @@ const Todolist = () => {
                 {
                   todoList.filter(todo => todo.done === false).length
                     ? todoList.filter(todo => todo.done === false).map(todo => (
-                      <Todo key={todo._id} id={todo._id} text={todo.text} priority={todo.priority} onDoneClick={updateTodoDone} onDeleteClick={deleteTodo}/>))
+                      <Todo
+                        key={todo._id}
+                        id={todo._id}
+                        text={todo.text}
+                        priority={todo.priority}
+                        onDoneClick={updateTodoDone}
+                        onDeleteClick={deleteTodo}
+                      />))
                     : <NoTodoLabel text={'Add new TODOs!'}/>
                 }
                 {
@@ -219,7 +227,15 @@ const Todolist = () => {
                   {
                     todoList.filter(todo => todo.done).length
                       ? todoList.filter(todo => todo.done).map(todo =>
-                        <Todo key={todo._id} id={todo._id} text={todo.text} priority={todo.priority} done={todo.done} onDoneClick={updateTodoDone} onDeleteClick={deleteTodo}/>)
+                        <Todo
+                          key={todo._id}
+                          id={todo._id}
+                          text={todo.text}
+                          priority={todo.priority}
+                          done={todo.done}
+                          onDoneClick={updateTodoDone}
+                          onDeleteClick={deleteTodo}
+                        />)
                       : <NoTodoLabel text={'There is no TODO to list!'} />
                   }
                 </div>
