@@ -18,6 +18,12 @@
   &__img {
     height: 30%;
     max-width: 80%;
-    margin-bottom: 8rem
+    margin-bottom: 3rem
+  }
+
+  &__with {
+    color: $letter_color;
+    font-size: 1.7rem;
+    margin-bottom: 3rem
   }
 };

@@ -28,6 +28,7 @@ const Login = () => {
     <div className="login">
       <h3 className="login__title">LOGIN</h3>
       <img src='/login.svg' className='login__img'/>
+      <span className='login__with'>with</span>
       <GoogleLogin
         onSuccess={handleSuccess}
         onFailure={loginError}
