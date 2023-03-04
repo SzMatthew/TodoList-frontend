@@ -13,7 +13,8 @@ const ProjectName = ({ project, onDeleteProject, setSideNavOpen }) => {
     setSideNavOpen(false);
   };
 
-  const handleDeleteClick = () => {
+  const handleDeleteClick = (event) => {
+    event.stopPropagation();
     onDeleteProject(project._id);
   };
 
