@@ -12,7 +12,6 @@ const Login = () => {
 
   useEffect(() => {
     const user = Cookies.get('user');
-    console.log('🚀 ~ user:', user);
     if (user) {
       handleSuccess(JSON.parse(user));
     }
