@@ -9,6 +9,12 @@
   align-items: center;
   background-color: #1F1F1F;
 
+  &__title {
+    font-size: 4rem;
+    color: $letter_color;
+    margin-bottom: 5rem;
+  }
+
   &__img {
     height: 30%;
     max-width: 80%;
